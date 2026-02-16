@@ -12,13 +12,14 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
-  <!-- ==================== FIREBASE SDK ==================== -->
+  <!-- ==================== FIREBASE SDK (CORRECT VERSION FOR GITHUB) ==================== -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
   
   <style>
+    /* ==================== GLOBAL STYLES ==================== */
     * {
       margin: 0;
       padding: 0;
@@ -27,8 +28,9 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background: #f9fafc;
-      color: #1a2639;
+      background: #f8fafc;
+      color: #1e293b;
+      line-height: 1.5;
     }
 
     :root {
@@ -39,32 +41,31 @@
       --warning: #f59e0b;
       --dark: #1e293b;
       --light: #f8fafc;
-      --gray: #94a3b8;
+      --gray: #64748b;
     }
 
-    /* Container */
     .container {
-      max-width: 1440px;
+      max-width: 1400px;
       margin: 0 auto;
-      padding: 0 30px;
+      padding: 0 20px;
     }
 
-    /* Header */
+    /* ==================== HEADER ==================== */
     .header {
       background: white;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
       position: sticky;
       top: 0;
       z-index: 100;
+      padding: 15px 0;
     }
 
     .header-content {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 15px 0;
       flex-wrap: wrap;
-      gap: 15px;
+      gap: 20px;
     }
 
     .logo {
@@ -75,11 +76,11 @@
       -webkit-text-fill-color: transparent;
     }
 
-    /* Search Bar with Suggestions */
+    /* Search Bar */
     .search-container {
-      position: relative;
       flex: 1;
       max-width: 400px;
+      position: relative;
     }
 
     .search-box {
@@ -87,8 +88,8 @@
       padding: 12px 20px;
       border: 1px solid #e2e8f0;
       border-radius: 40px;
-      font-family: inherit;
-      transition: 0.2s;
+      font-size: 1rem;
+      transition: all 0.2s;
     }
 
     .search-box:focus {
@@ -108,8 +109,8 @@
       margin-top: 5px;
       max-height: 300px;
       overflow-y: auto;
-      z-index: 1000;
       display: none;
+      z-index: 1000;
     }
 
     .suggestions.active {
@@ -120,17 +121,21 @@
       padding: 12px 20px;
       cursor: pointer;
       transition: 0.2s;
+      border-bottom: 1px solid #e2e8f0;
     }
 
     .suggestion-item:hover {
-      background: var(--light);
+      background: #f1f5f9;
+    }
+
+    .suggestion-item:last-child {
+      border-bottom: none;
     }
 
     /* Navigation */
     .nav-menu {
       display: flex;
       gap: 30px;
-      align-items: center;
     }
 
     .nav-link {
@@ -169,7 +174,7 @@
 
     .cart-icon {
       position: relative;
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       cursor: pointer;
       color: var(--dark);
     }
@@ -181,6 +186,7 @@
       background: var(--secondary);
       color: white;
       font-size: 0.7rem;
+      font-weight: 600;
       padding: 2px 6px;
       border-radius: 20px;
       min-width: 18px;
@@ -189,12 +195,12 @@
 
     .auth-buttons {
       display: flex;
-      gap: 10px;
+      gap: 12px;
     }
 
     /* Buttons */
     .btn {
-      padding: 12px 28px;
+      padding: 10px 24px;
       border-radius: 40px;
       border: none;
       font-weight: 600;
@@ -209,13 +215,12 @@
     .btn-primary {
       background: var(--primary);
       color: white;
-      box-shadow: 0 8px 16px rgba(37,99,235,0.2);
     }
 
     .btn-primary:hover {
       background: var(--primary-dark);
       transform: translateY(-2px);
-      box-shadow: 0 12px 24px rgba(37,99,235,0.3);
+      box-shadow: 0 10px 20px rgba(37,99,235,0.2);
     }
 
     .btn-outline {
@@ -224,8 +229,12 @@
     }
 
     .btn-outline:hover {
-      background: var(--light);
-      border-color: var(--primary);
+      background: #f1f5f9;
+    }
+
+    .btn-danger {
+      background: var(--danger);
+      color: white;
     }
 
     .btn-success {
@@ -233,50 +242,7 @@
       color: white;
     }
 
-    /* Image Upload */
-    .image-upload-container {
-      display: flex;
-      gap: 15px;
-      align-items: center;
-      margin: 10px 0;
-    }
-
-    .image-preview {
-      width: 80px;
-      height: 80px;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 2px solid var(--gray-200);
-    }
-
-    .image-preview img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .upload-progress {
-      width: 100%;
-      height: 4px;
-      background: #e2e8f0;
-      border-radius: 2px;
-      margin-top: 10px;
-      display: none;
-    }
-
-    .upload-progress.active {
-      display: block;
-    }
-
-    .upload-progress-bar {
-      height: 100%;
-      background: var(--primary);
-      border-radius: 2px;
-      width: 0%;
-      transition: width 0.3s;
-    }
-
-    /* Main Layout */
+    /* ==================== MAIN LAYOUT ==================== */
     .main-layout {
       display: grid;
       grid-template-columns: 280px 1fr;
@@ -287,18 +253,18 @@
     /* Filters Sidebar */
     .filters-sidebar {
       background: white;
-      border-radius: 24px;
+      border-radius: 20px;
       padding: 25px;
       position: sticky;
       top: 100px;
       height: fit-content;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
 
     .filter-section {
       margin-bottom: 25px;
       padding-bottom: 20px;
-      border-bottom: 1px solid #eef2f6;
+      border-bottom: 1px solid #e2e8f0;
     }
 
     .filter-section h3 {
@@ -312,10 +278,9 @@
     .filter-option {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
+      gap: 10px;
+      margin-bottom: 10px;
       cursor: pointer;
-      color: #4a5568;
     }
 
     .price-inputs {
@@ -326,25 +291,25 @@
 
     .price-inputs input {
       width: 100px;
-      padding: 10px;
+      padding: 8px;
       border: 1px solid #e2e8f0;
-      border-radius: 12px;
+      border-radius: 8px;
     }
 
     .sort-select {
       width: 100%;
-      padding: 12px;
+      padding: 10px;
       border: 1px solid #e2e8f0;
-      border-radius: 12px;
+      border-radius: 8px;
       font-family: inherit;
     }
 
     /* Products Grid */
     .products-section {
       background: white;
-      border-radius: 24px;
+      border-radius: 20px;
       padding: 25px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
 
     .products-header {
@@ -362,15 +327,15 @@
 
     .product-card {
       background: white;
-      border: 1px solid #eef2f6;
-      border-radius: 20px;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
       overflow: hidden;
       transition: all 0.3s;
     }
 
     .product-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 20px 30px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     }
 
     .product-image {
@@ -408,20 +373,19 @@
 
     .product-rating {
       color: #fbbf24;
-      margin: 10px 0;
-      font-size: 0.9rem;
+      margin: 8px 0;
     }
 
     .product-price {
       font-weight: 700;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       color: var(--primary);
-      margin: 15px 0;
+      margin: 12px 0;
     }
 
     .product-actions {
       display: flex;
-      gap: 10px;
+      gap: 8px;
     }
 
     .btn-add-cart {
@@ -451,24 +415,24 @@
     }
 
     .btn-review:hover {
-      background: var(--light);
+      background: #f1f5f9;
       color: var(--warning);
     }
 
-    /* Admin Panel */
+    /* ==================== ADMIN PANEL ==================== */
     .admin-panel {
       background: white;
-      border-radius: 24px;
+      border-radius: 20px;
       padding: 30px;
       margin: 30px 0;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
 
     .admin-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
 
     .admin-tabs {
@@ -479,7 +443,7 @@
     }
 
     .tab-btn {
-      padding: 12px 24px;
+      padding: 10px 20px;
       border: 1px solid #e2e8f0;
       background: white;
       border-radius: 30px;
@@ -494,7 +458,7 @@
       border-color: var(--primary);
     }
 
-    /* Analytics Dashboard */
+    /* Analytics Cards */
     .analytics-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -506,8 +470,7 @@
       background: linear-gradient(135deg, var(--primary), var(--primary-dark));
       color: white;
       padding: 25px;
-      border-radius: 20px;
-      box-shadow: 0 10px 20px rgba(37,99,235,0.2);
+      border-radius: 16px;
     }
 
     .analytics-card.secondary {
@@ -526,10 +489,10 @@
 
     .chart-container {
       background: white;
-      border-radius: 20px;
+      border-radius: 16px;
       padding: 20px;
       margin: 20px 0;
-      border: 1px solid #eef2f6;
+      border: 1px solid #e2e8f0;
     }
 
     /* Product Form */
@@ -537,54 +500,94 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 15px;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
       padding: 20px;
       background: #f8fafc;
-      border-radius: 16px;
+      border-radius: 12px;
     }
 
     .product-form input,
-    .product-form textarea,
     .product-form select {
       padding: 12px;
       border: 1px solid #e2e8f0;
-      border-radius: 12px;
+      border-radius: 8px;
       font-family: inherit;
     }
 
+    .image-upload-container {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .image-preview {
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 2px solid #e2e8f0;
+    }
+
+    .image-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .upload-progress {
+      height: 4px;
+      background: #e2e8f0;
+      border-radius: 2px;
+      margin-top: 10px;
+      display: none;
+    }
+
+    .upload-progress.active {
+      display: block;
+    }
+
+    .upload-progress-bar {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 2px;
+      width: 0%;
+      transition: width 0.3s;
+    }
+
+    /* Admin Products List */
     .admin-products-list {
       display: grid;
-      gap: 15px;
-      max-height: 500px;
+      gap: 10px;
+      max-height: 400px;
       overflow-y: auto;
     }
 
     .admin-product-item {
       display: flex;
       align-items: center;
-      gap: 20px;
-      padding: 15px;
+      gap: 15px;
+      padding: 12px;
       background: #f8fafc;
-      border-radius: 16px;
+      border-radius: 12px;
     }
 
     .admin-product-item img {
-      width: 60px;
-      height: 60px;
+      width: 50px;
+      height: 50px;
       object-fit: cover;
-      border-radius: 12px;
+      border-radius: 8px;
     }
 
     .admin-product-actions {
       margin-left: auto;
       display: flex;
-      gap: 10px;
+      gap: 8px;
     }
 
     .btn-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
       border: none;
       cursor: pointer;
       transition: 0.2s;
@@ -600,17 +603,17 @@
       color: white;
     }
 
-    /* Order History */
+    /* ==================== ORDER HISTORY ==================== */
     .orders-section {
       background: white;
-      border-radius: 24px;
+      border-radius: 20px;
       padding: 30px;
       margin: 30px 0;
     }
 
     .order-card {
       background: #f8fafc;
-      border-radius: 16px;
+      border-radius: 12px;
       padding: 20px;
       margin-bottom: 15px;
     }
@@ -625,7 +628,7 @@
     }
 
     .order-status {
-      padding: 5px 15px;
+      padding: 4px 12px;
       border-radius: 30px;
       font-size: 0.85rem;
       font-weight: 600;
@@ -636,7 +639,7 @@
     .status-shipped { background: #d1fae5; color: #065f46; }
     .status-delivered { background: #dcfce7; color: #166534; }
 
-    /* Modal */
+    /* ==================== MODALS ==================== */
     .modal {
       display: none;
       position: fixed;
@@ -656,19 +659,19 @@
 
     .modal-content {
       background: white;
-      padding: 40px;
-      border-radius: 30px;
+      padding: 30px;
+      border-radius: 20px;
       width: 90%;
-      max-width: 500px;
-      position: relative;
+      max-width: 450px;
       max-height: 80vh;
       overflow-y: auto;
+      position: relative;
     }
 
     .close-modal {
       position: absolute;
-      top: 20px;
-      right: 20px;
+      top: 15px;
+      right: 15px;
       background: none;
       border: none;
       font-size: 1.5rem;
@@ -679,10 +682,10 @@
     .auth-form input,
     .auth-form textarea {
       width: 100%;
-      padding: 14px;
-      margin: 10px 0;
+      padding: 12px;
+      margin: 8px 0;
       border: 1px solid #e2e8f0;
-      border-radius: 12px;
+      border-radius: 8px;
       font-family: inherit;
     }
 
@@ -690,27 +693,42 @@
     .rating-input {
       display: flex;
       gap: 8px;
-      margin: 20px 0;
+      margin: 15px 0;
       font-size: 1.5rem;
       color: #d1d5db;
       cursor: pointer;
     }
 
-    .rating-input i.active,
-    .rating-input i:hover {
+    .rating-input i.active {
       color: #fbbf24;
     }
 
-    /* Toast */
+    /* Cart Items */
+    .cart-item {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .cart-item img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    /* Toast Notification */
     .toast {
       position: fixed;
       bottom: 30px;
       right: 30px;
       background: var(--dark);
       color: white;
-      padding: 15px 30px;
-      border-radius: 50px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      padding: 12px 24px;
+      border-radius: 40px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
       z-index: 1000;
       display: none;
       animation: slideIn 0.3s;
@@ -741,7 +759,7 @@
     .spinner {
       width: 40px;
       height: 40px;
-      border: 3px solid #f3f3f3;
+      border: 3px solid #e2e8f0;
       border-top: 3px solid var(--primary);
       border-radius: 50%;
       animation: spin 1s linear infinite;
@@ -753,7 +771,7 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* Responsive */
+    /* Responsive Design */
     @media (max-width: 768px) {
       .main-layout {
         grid-template-columns: 1fr;
@@ -772,6 +790,10 @@
         flex-wrap: wrap;
         justify-content: center;
       }
+      
+      .admin-tabs {
+        justify-content: center;
+      }
     }
   </style>
 </head>
@@ -781,23 +803,25 @@
     <div class="container header-content">
       <div class="logo">STYLE HUB</div>
 
-      <!-- Search with Suggestions -->
+      <!-- Search Bar -->
       <div class="search-container">
-        <input type="text" class="search-box" id="search-input" placeholder="Search products..." autocomplete="off">
+        <input type="text" class="search-box" id="search-input" placeholder="Search products...">
         <div class="suggestions" id="suggestions"></div>
       </div>
 
+      <!-- Navigation -->
       <nav class="nav-menu">
         <a href="#" class="nav-link">Home</a>
         <a href="#" class="nav-link">Shop</a>
-        <a href="#" class="nav-link">New Arrivals</a>
+        <a href="#" class="nav-link">New</a>
         <a href="#" class="nav-link">Sale</a>
       </nav>
 
+      <!-- User Menu -->
       <div class="user-menu">
         <div class="auth-buttons" id="auth-buttons">
-          <button class="btn btn-outline" onclick="showAuthModal('login')">Login</button>
-          <button class="btn btn-primary" onclick="showAuthModal('register')">Register</button>
+          <button class="btn btn-outline" onclick="showModal('auth-modal', 'login')">Login</button>
+          <button class="btn btn-primary" onclick="showModal('auth-modal', 'register')">Register</button>
         </div>
         <div class="cart-icon" onclick="showCart()">
           <i class="fas fa-shopping-bag"></i>
@@ -811,11 +835,11 @@
     <!-- Loading Spinner -->
     <div class="loading-spinner" id="loading-spinner">
       <div class="spinner"></div>
-      <p style="margin-top: 20px;">Loading data from Firebase...</p>
+      <p style="margin-top: 15px;">Loading data from Firebase...</p>
     </div>
 
-    <!-- Admin Panel Toggle -->
-    <div style="text-align: right; margin: 20px 0;" id="admin-toggle" style="display: none;">
+    <!-- Admin Toggle Button -->
+    <div id="admin-toggle" style="display: none; text-align: right; margin: 20px 0;">
       <button class="btn btn-outline" onclick="toggleAdminPanel()">
         <i class="fas fa-cog"></i> Admin Dashboard
       </button>
@@ -828,14 +852,15 @@
         <button class="btn btn-outline" onclick="toggleAdminPanel()">Close</button>
       </div>
 
+      <!-- Admin Tabs -->
       <div class="admin-tabs">
-        <button class="tab-btn" onclick="switchAdminTab('overview')">Overview</button>
-        <button class="tab-btn active" onclick="switchAdminTab('products')">Products</button>
-        <button class="tab-btn" onclick="switchAdminTab('orders')">All Orders</button>
-        <button class="tab-btn" onclick="switchAdminTab('users')">Users</button>
+        <button class="tab-btn active" onclick="switchTab('products')">Products</button>
+        <button class="tab-btn" onclick="switchTab('overview')">Overview</button>
+        <button class="tab-btn" onclick="switchTab('orders')">Orders</button>
+        <button class="tab-btn" onclick="switchTab('users')">Users</button>
       </div>
 
-      <!-- Overview Tab with Analytics -->
+      <!-- Overview Tab -->
       <div id="overview-tab" style="display: none;">
         <div class="analytics-grid">
           <div class="analytics-card">
@@ -854,43 +879,55 @@
             <div>Total Users</div>
           </div>
         </div>
-
         <div class="chart-container">
           <canvas id="sales-chart"></canvas>
         </div>
       </div>
 
-      <!-- Product Form with Image Upload -->
-      <div class="product-form" id="product-form">
-        <input type="text" id="product-name" placeholder="Product Name">
-        <input type="text" id="product-desc" placeholder="Description">
-        <input type="number" id="product-price" placeholder="Price">
-        <div class="image-upload-container">
-          <input type="file" id="product-image-file" accept="image/*" style="display: none;">
-          <button class="btn btn-outline" onclick="document.getElementById('product-image-file').click()">
-            <i class="fas fa-upload"></i> Choose Image
-          </button>
-          <div class="image-preview" id="image-preview">
-            <img src="https://via.placeholder.com/80" alt="Preview">
+      <!-- Products Tab -->
+      <div id="products-tab">
+        <!-- Product Form -->
+        <div class="product-form" id="product-form">
+          <input type="text" id="product-name" placeholder="Product Name">
+          <input type="text" id="product-desc" placeholder="Description">
+          <input type="number" id="product-price" placeholder="Price">
+          <select id="product-category">
+            <option value="Shirts">Shirts</option>
+            <option value="T-Shirts">T-Shirts</option>
+            <option value="Pants">Pants</option>
+            <option value="Shoes">Shoes</option>
+            <option value="Watches">Watches</option>
+            <option value="Accessories">Accessories</option>
+          </select>
+          <div class="image-upload-container">
+            <input type="file" id="product-image-file" accept="image/*" style="display: none;">
+            <button class="btn btn-outline" type="button" onclick="document.getElementById('product-image-file').click()">
+              <i class="fas fa-upload"></i> Upload Image
+            </button>
+            <div class="image-preview" id="image-preview">
+              <img src="https://via.placeholder.com/60" alt="Preview">
+            </div>
           </div>
+          <input type="hidden" id="product-image-url">
+          <div class="upload-progress" id="upload-progress">
+            <div class="upload-progress-bar" id="upload-progress-bar"></div>
+          </div>
+          <button class="btn btn-primary" type="button" onclick="saveProduct()">Save Product</button>
         </div>
-        <div class="upload-progress" id="upload-progress">
-          <div class="upload-progress-bar" id="upload-progress-bar"></div>
-        </div>
-        <select id="product-category">
-          <option value="Shirts">Shirts</option>
-          <option value="T-Shirts">T-Shirts</option>
-          <option value="Pants">Pants</option>
-          <option value="Shoes">Shoes</option>
-          <option value="Watches">Watches</option>
-          <option value="Accessories">Accessories</option>
-        </select>
-        <input type="hidden" id="product-image-url">
-        <button class="btn btn-primary" onclick="saveProduct()">Save Product</button>
+
+        <!-- Products List -->
+        <div class="admin-products-list" id="admin-products-list"></div>
       </div>
 
-      <!-- Products List -->
-      <div class="admin-products-list" id="admin-products-list"></div>
+      <!-- Orders Tab -->
+      <div id="orders-tab" style="display: none;">
+        <div class="admin-products-list" id="admin-orders-list"></div>
+      </div>
+
+      <!-- Users Tab -->
+      <div id="users-tab" style="display: none;">
+        <div class="admin-products-list" id="admin-users-list"></div>
+      </div>
     </div>
 
     <!-- Main Layout -->
@@ -898,7 +935,7 @@
       <!-- Filters Sidebar -->
       <aside class="filters-sidebar">
         <h3 style="margin-bottom: 20px;">Filters</h3>
-
+        
         <div class="filter-section">
           <h3>Categories</h3>
           <div id="category-filters"></div>
@@ -941,10 +978,9 @@
       <!-- Products Section -->
       <section class="products-section">
         <div class="products-header">
-          <h2>All Products</h2>
-          <span id="product-count"></span>
+          <h2>Products</h2>
+          <span id="product-count">0 products</span>
         </div>
-
         <div class="product-grid" id="product-grid"></div>
       </section>
     </div>
@@ -961,11 +997,11 @@
     <div class="modal-content">
       <button class="close-modal" onclick="closeModal('auth-modal')">&times;</button>
       <h2 id="auth-title">Login</h2>
-      <form class="auth-form" onsubmit="handleAuth(event)">
+      <form onsubmit="handleAuth(event)">
         <input type="text" id="auth-name" placeholder="Full Name" style="display: none;">
         <input type="email" id="auth-email" placeholder="Email" required>
         <input type="password" id="auth-password" placeholder="Password" required>
-        <button type="submit" class="btn btn-primary" style="width: 100%;">Continue</button>
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 15px;">Continue</button>
       </form>
     </div>
   </div>
@@ -982,19 +1018,19 @@
         <i class="far fa-star" data-rating="4"></i>
         <i class="far fa-star" data-rating="5"></i>
       </div>
-      <textarea id="review-text" placeholder="Share your experience..." rows="4" style="width: 100%; padding: 14px; border: 1px solid #e2e8f0; border-radius: 12px; margin: 10px 0;"></textarea>
+      <textarea id="review-text" placeholder="Your experience..." rows="4" style="width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; margin: 10px 0;"></textarea>
       <button class="btn btn-primary" style="width: 100%;" onclick="submitReview()">Submit Review</button>
     </div>
   </div>
 
   <!-- Cart Modal -->
   <div class="modal" id="cart-modal">
-    <div class="modal-content" style="max-width: 500px;">
+    <div class="modal-content">
       <button class="close-modal" onclick="closeModal('cart-modal')">&times;</button>
       <h3 style="margin-bottom: 20px;">Shopping Cart</h3>
       <div id="cart-items" style="max-height: 400px; overflow-y: auto;"></div>
-      <div style="margin: 20px 0; padding: 20px 0; border-top: 1px solid #e2e8f0;">
-        <div style="display: flex; justify-content: space-between; font-weight: 600;">
+      <div style="margin: 20px 0; padding-top: 20px; border-top: 1px solid #e2e8f0;">
+        <div style="display: flex; justify-content: space-between; font-weight: 600; font-size: 1.2rem;">
           <span>Total:</span>
           <span id="cart-total">$0.00</span>
         </div>
@@ -1008,14 +1044,14 @@
 
   <script>
     // ==================== FIREBASE CONFIGURATION ====================
-    // TODO: Replace with your Firebase project configuration
+    // Replace with your Firebase config
     const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_AUTH_DOMAIN",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_STORAGE_BUCKET",
-      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-      appId: "YOUR_APP_ID"
+      apiKey: "AIzaSyB_4yX5n5X5n5X5n5X5n5X5n5X5n5X5n5X5", // Replace with your actual API key
+      authDomain: "your-project.firebaseapp.com", // Replace with your auth domain
+      projectId: "your-project-id", // Replace with your project ID
+      storageBucket: "your-project.appspot.com", // Replace with your storage bucket
+      messagingSenderId: "123456789012", // Replace with your sender ID
+      appId: "1:123456789012:web:abc123def456" // Replace with your app ID
     };
 
     // Initialize Firebase
@@ -1031,36 +1067,51 @@
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     let salesChart = null;
     let selectedFile = null;
+    let currentReviewProduct = null;
 
-    // ==================== FIREBASE AUTH STATE ====================
+    // ==================== AUTH STATE OBSERVER ====================
     auth.onAuthStateChanged(async (user) => {
       if (user) {
-        // User is signed in
-        const userDoc = await db.collection('users').doc(user.uid).get();
-        currentUser = {
-          uid: user.uid,
-          email: user.email,
-          ...userDoc.data()
-        };
-        
-        updateUIForUser();
-        showToast(`Welcome back, ${currentUser.name}!`);
+        try {
+          const userDoc = await db.collection('users').doc(user.uid).get();
+          if (userDoc.exists) {
+            currentUser = {
+              uid: user.uid,
+              email: user.email,
+              ...userDoc.data()
+            };
+          } else {
+            // Create user document if it doesn't exist
+            const isAdmin = (await db.collection('users').get()).empty;
+            const userData = {
+              name: user.email.split('@')[0],
+              email: user.email,
+              isAdmin: isAdmin,
+              createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+            await db.collection('users').doc(user.uid).set(userData);
+            currentUser = { uid: user.uid, ...userData };
+          }
+          updateUIForUser();
+          showToast(`Welcome back, ${currentUser.name || 'User'}!`);
+        } catch (error) {
+          console.error('Error loading user data:', error);
+        }
       } else {
-        // User is signed out
         currentUser = null;
         updateUIForUser();
       }
-      
-      // Load data after auth state is known
       await loadProducts();
       await loadOrders();
     });
 
-    // ==================== AUTHENTICATION ====================
-    function showAuthModal(type) {
-      document.getElementById('auth-modal').classList.add('active');
-      document.getElementById('auth-title').textContent = type === 'login' ? 'Login' : 'Create Account';
-      document.getElementById('auth-name').style.display = type === 'register' ? 'block' : 'none';
+    // ==================== AUTH FUNCTIONS ====================
+    function showModal(modalId, type = 'login') {
+      if (modalId === 'auth-modal') {
+        document.getElementById('auth-title').textContent = type === 'login' ? 'Login' : 'Create Account';
+        document.getElementById('auth-name').style.display = type === 'register' ? 'block' : 'none';
+      }
+      document.getElementById(modalId).classList.add('active');
     }
 
     function closeModal(modalId) {
@@ -1075,30 +1126,20 @@
       const title = document.getElementById('auth-title').textContent;
 
       try {
+        document.getElementById('loading-spinner').classList.add('active');
+        
         if (title === 'Create Account') {
-          // Register with Firebase
           const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-          const user = userCredential.user;
-          
-          // Check if this is the first user (will be admin)
-          const usersSnapshot = await db.collection('users').get();
-          const isAdmin = usersSnapshot.empty;
-
-          // Save user data to Firestore
-          await db.collection('users').doc(user.uid).set({
-            name: name,
-            email: email,
-            isAdmin: isAdmin,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-          });
-
           showToast('Welcome to Style Hub! 🎉');
         } else {
-          // Login with Firebase
           await auth.signInWithEmailAndPassword(email, password);
         }
+        
+        closeModal('auth-modal');
+        document.getElementById('loading-spinner').classList.remove('active');
       } catch (error) {
         showToast(error.message);
+        document.getElementById('loading-spinner').classList.remove('active');
       }
     }
 
@@ -1117,7 +1158,7 @@
       
       if (currentUser) {
         authButtons.innerHTML = `
-          <span style="font-weight: 500;">Hello, ${currentUser.name}</span>
+          <span style="font-weight: 500;">Hello, ${currentUser.name || 'User'}</span>
           <button class="btn btn-outline" onclick="logout()">Logout</button>
         `;
         
@@ -1126,18 +1167,17 @@
         }
         
         document.getElementById('orders-section').style.display = 'block';
-        loadOrders();
       } else {
         authButtons.innerHTML = `
-          <button class="btn btn-outline" onclick="showAuthModal('login')">Login</button>
-          <button class="btn btn-primary" onclick="showAuthModal('register')">Register</button>
+          <button class="btn btn-outline" onclick="showModal('auth-modal', 'login')">Login</button>
+          <button class="btn btn-primary" onclick="showModal('auth-modal', 'register')">Register</button>
         `;
         adminToggle.style.display = 'none';
         document.getElementById('orders-section').style.display = 'none';
       }
     }
 
-    // ==================== FIREBASE PRODUCTS ====================
+    // ==================== PRODUCT FUNCTIONS ====================
     async function loadProducts() {
       try {
         document.getElementById('loading-spinner').classList.add('active');
@@ -1154,350 +1194,95 @@
         document.getElementById('loading-spinner').classList.remove('active');
       } catch (error) {
         showToast('Error loading products: ' + error.message);
+        document.getElementById('loading-spinner').classList.remove('active');
       }
     }
 
-    async function saveProduct() {
-      if (!currentUser?.isAdmin) {
-        showToast('Admin access required');
+    function displayProducts(productsToShow) {
+      const grid = document.getElementById('product-grid');
+      if (!productsToShow || productsToShow.length === 0) {
+        grid.innerHTML = '<p style="text-align: center; color: var(--gray);">No products found.</p>';
         return;
       }
 
-      const name = document.getElementById('product-name').value;
-      const desc = document.getElementById('product-desc').value;
-      const price = parseFloat(document.getElementById('product-price').value);
-      const category = document.getElementById('product-category').value;
-      const imageUrl = document.getElementById('product-image-url').value;
-
-      if (!name || !price || !imageUrl) {
-        showToast('Please fill all fields and upload an image');
-        return;
-      }
-
-      const editingId = document.getElementById('product-form').dataset.editingId;
-      
-      try {
-        if (editingId) {
-          // Update existing product
-          await db.collection('products').doc(editingId).update({
-            name, desc, price, category,
-            image: imageUrl,
-            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-          });
-          showToast('Product updated!');
-          delete document.getElementById('product-form').dataset.editingId;
-        } else {
-          // Add new product
-          await db.collection('products').add({
-            name, desc, price, category,
-            image: imageUrl,
-            rating: 0,
-            reviews: [],
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-          });
-          showToast('Product added!');
-        }
-
-        // Reset form
-        document.getElementById('product-name').value = '';
-        document.getElementById('product-desc').value = '';
-        document.getElementById('product-price').value = '';
-        document.getElementById('product-image-url').value = '';
-        document.getElementById('image-preview').innerHTML = '<img src="https://via.placeholder.com/80" alt="Preview">';
-        
-        // Reload products
-        await loadProducts();
-        if (currentUser?.isAdmin) {
-          loadAdminProducts();
-        }
-      } catch (error) {
-        showToast('Error saving product: ' + error.message);
-      }
-    }
-
-    async function deleteProduct(id) {
-      if (!currentUser?.isAdmin) return;
-      
-      if (confirm('Delete this product?')) {
-        try {
-          await db.collection('products').doc(id).delete();
-          showToast('Product deleted');
-          await loadProducts();
-          if (currentUser?.isAdmin) {
-            loadAdminProducts();
-          }
-        } catch (error) {
-          showToast('Error deleting product: ' + error.message);
-        }
-      }
-    }
-
-    // ==================== IMAGE UPLOAD ====================
-    document.getElementById('product-image-file').addEventListener('change', async function(e) {
-      const file = e.target.files[0];
-      if (!file) return;
-
-      // Preview image
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        document.getElementById('image-preview').innerHTML = `<img src="${e.target.result}" alt="Preview">`;
-      };
-      reader.readAsDataURL(file);
-
-      // Upload to Firebase Storage
-      try {
-        const progressBar = document.getElementById('upload-progress');
-        const progressBarFill = document.getElementById('upload-progress-bar');
-        
-        progressBar.classList.add('active');
-        
-        const storageRef = storage.ref();
-        const fileRef = storageRef.child(`products/${Date.now()}_${file.name}`);
-        
-        const uploadTask = fileRef.put(file);
-        
-        uploadTask.on('state_changed',
-          (snapshot) => {
-            // Progress
-            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            progressBarFill.style.width = progress + '%';
-          },
-          (error) => {
-            showToast('Upload failed: ' + error.message);
-            progressBar.classList.remove('active');
-          },
-          async () => {
-            // Complete
-            const downloadUrl = await uploadTask.snapshot.ref.getDownloadURL();
-            document.getElementById('product-image-url').value = downloadUrl;
-            progressBar.classList.remove('active');
-            showToast('Image uploaded successfully!');
-          }
-        );
-      } catch (error) {
-        showToast('Error uploading image: ' + error.message);
-      }
-    });
-
-    // ==================== ADMIN PANEL ====================
-    function toggleAdminPanel() {
-      const panel = document.getElementById('admin-panel');
-      if (!currentUser?.isAdmin) {
-        showToast('Admin access required');
-        return;
-      }
-      panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
-      if (panel.style.display === 'block') {
-        loadAdminProducts();
-        loadAnalytics();
-      }
-    }
-
-    function switchAdminTab(tab) {
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
-      
-      document.getElementById('overview-tab').style.display = 'none';
-      
-      if (tab === 'overview') {
-        document.getElementById('overview-tab').style.display = 'block';
-        loadAnalytics();
-      } else if (tab === 'products') {
-        loadAdminProducts();
-      } else if (tab === 'orders') {
-        loadAllOrders();
-      } else if (tab === 'users') {
-        loadAllUsers();
-      }
-    }
-
-    async function loadAdminProducts() {
-      const list = document.getElementById('admin-products-list');
-      list.innerHTML = products.map(p => `
-        <div class="admin-product-item">
-          <img src="${p.image}" alt="${p.name}">
-          <div style="flex: 1;">
-            <strong>${p.name}</strong><br>
-            <small>$${p.price} | ${p.category}</small>
+      grid.innerHTML = productsToShow.map(p => `
+        <div class="product-card">
+          <div class="product-image">
+            <img src="${p.image || 'https://via.placeholder.com/400'}" alt="${p.name}" loading="lazy">
           </div>
-          <div class="admin-product-actions">
-            <button class="btn-icon btn-edit" onclick="editProduct('${p.id}')"><i class="fas fa-edit"></i></button>
-            <button class="btn-icon btn-delete" onclick="deleteProduct('${p.id}')"><i class="fas fa-trash"></i></button>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    function editProduct(id) {
-      const product = products.find(p => p.id === id);
-      document.getElementById('product-name').value = product.name;
-      document.getElementById('product-desc').value = product.desc;
-      document.getElementById('product-price').value = product.price;
-      document.getElementById('product-category').value = product.category;
-      document.getElementById('product-image-url').value = product.image;
-      document.getElementById('image-preview').innerHTML = `<img src="${product.image}" alt="Preview">`;
-      document.getElementById('product-form').dataset.editingId = id;
-    }
-
-    // ==================== ANALYTICS ====================
-    async function loadAnalytics() {
-      try {
-        // Load orders from Firestore
-        const ordersSnapshot = await db.collection('orders').get();
-        orders = ordersSnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
-
-        // Load users count
-        const usersSnapshot = await db.collection('users').get();
-        const totalUsers = usersSnapshot.size;
-
-        // Calculate totals
-        const totalRevenue = orders.reduce((sum, order) => sum + order.total, 0);
-        const totalOrders = orders.length;
-
-        document.getElementById('total-revenue').textContent = `$${totalRevenue.toFixed(2)}`;
-        document.getElementById('total-orders').textContent = totalOrders;
-        document.getElementById('total-users').textContent = totalUsers;
-
-        // Create sales chart
-        const ctx = document.getElementById('sales-chart').getContext('2d');
-        
-        // Group orders by date
-        const last7Days = [];
-        const salesData = [];
-        
-        for (let i = 6; i >= 0; i--) {
-          const date = new Date();
-          date.setDate(date.getDate() - i);
-          const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-          last7Days.push(dateStr);
-          
-          const daySales = orders
-            .filter(order => new Date(order.date.seconds * 1000).toDateString() === date.toDateString())
-            .reduce((sum, order) => sum + order.total, 0);
-          
-          salesData.push(daySales);
-        }
-
-        if (salesChart) {
-          salesChart.destroy();
-        }
-
-        salesChart = new Chart(ctx, {
-          type: 'line',
-          data: {
-            labels: last7Days,
-            datasets: [{
-              label: 'Sales ($)',
-              data: salesData,
-              borderColor: '#2563eb',
-              backgroundColor: 'rgba(37,99,235,0.1)',
-              tension: 0.4,
-              fill: true
-            }]
-          },
-          options: {
-            responsive: true,
-            plugins: {
-              legend: {
-                display: false
-              }
-            }
-          }
-        });
-      } catch (error) {
-        showToast('Error loading analytics: ' + error.message);
-      }
-    }
-
-    // ==================== ORDERS ====================
-    async function loadOrders() {
-      if (!currentUser) return;
-
-      try {
-        const ordersSnapshot = await db.collection('orders')
-          .where('userId', '==', currentUser.uid)
-          .orderBy('date', 'desc')
-          .get();
-
-        orders = ordersSnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
-
-        displayOrders();
-      } catch (error) {
-        showToast('Error loading orders: ' + error.message);
-      }
-    }
-
-    function displayOrders() {
-      const container = document.getElementById('orders-list');
-      
-      if (orders.length === 0) {
-        container.innerHTML = '<p style="color: #94a3b8; text-align: center;">No orders yet.</p>';
-        return;
-      }
-
-      container.innerHTML = orders.map(order => `
-        <div class="order-card">
-          <div class="order-header">
-            <div>
-              <strong>Order #${order.id.slice(-6)}</strong>
-              <div style="color: #64748b; font-size: 0.9rem;">${new Date(order.date.seconds * 1000).toLocaleDateString()}</div>
+          <div class="product-info">
+            <div class="product-name">${p.name || 'Unnamed Product'}</div>
+            <div class="product-category">${p.category || 'Uncategorized'}</div>
+            <div class="product-rating">
+              ${generateStars(p.rating || 0)} (${p.reviews?.length || 0})
             </div>
-            <span class="order-status status-${order.status}">${order.status}</span>
-          </div>
-          <div style="margin: 10px 0;">
-            ${order.items.map(item => `
-              <div style="display: flex; justify-content: space-between; margin: 5px 0;">
-                <span>${item.name} x${item.quantity}</span>
-                <span>$${(item.price * item.quantity).toFixed(2)}</span>
-              </div>
-            `).join('')}
-          </div>
-          <div style="font-weight: 600; text-align: right; padding-top: 10px; border-top: 1px solid #e2e8f0;">
-            Total: $${order.total.toFixed(2)}
+            <div class="product-price">$${(p.price || 0).toFixed(2)}</div>
+            <div class="product-actions">
+              <button class="btn-add-cart" onclick="addToCart('${p.id}')">
+                <i class="fas fa-cart-plus"></i> Add
+              </button>
+              <button class="btn-review" onclick="showReviewModal('${p.id}')">
+                <i class="far fa-star"></i>
+              </button>
+            </div>
           </div>
         </div>
       `).join('');
     }
 
-    async function checkout() {
-      if (!currentUser) {
-        showToast('Please login first');
-        return;
+    function generateStars(rating) {
+      let stars = '';
+      for (let i = 1; i <= 5; i++) {
+        if (i <= Math.floor(rating)) {
+          stars += '<i class="fas fa-star"></i>';
+        } else if (i - rating < 1 && i - rating > 0) {
+          stars += '<i class="fas fa-star-half-alt"></i>';
+        } else {
+          stars += '<i class="far fa-star"></i>';
+        }
       }
-
-      if (cart.length === 0) {
-        showToast('Cart is empty');
-        return;
-      }
-
-      const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-
-      try {
-        await db.collection('orders').add({
-          userId: currentUser.uid,
-          items: cart,
-          total: total,
-          status: 'pending',
-          date: firebase.firestore.FieldValue.serverTimestamp()
-        });
-
-        cart = [];
-        updateCart();
-        closeModal('cart-modal');
-        showToast('Order placed successfully!');
-        await loadOrders();
-      } catch (error) {
-        showToast('Error placing order: ' + error.message);
-      }
+      return stars;
     }
 
-    // ==================== CART ====================
+    // ==================== FILTER FUNCTIONS ====================
+    function loadCategoryFilters() {
+      const categories = [...new Set(products.map(p => p.category))];
+      const container = document.getElementById('category-filters');
+      if (!container) return;
+      
+      container.innerHTML = categories.map(cat => `
+        <label class="filter-option">
+          <input type="checkbox" value="${cat}" onchange="applyFilters()"> ${cat}
+        </label>
+      `).join('');
+    }
+
+    function applyFilters() {
+      let filtered = [...products];
+      
+      const selectedCats = [...document.querySelectorAll('#category-filters input:checked')].map(cb => cb.value);
+      if (selectedCats.length) {
+        filtered = filtered.filter(p => selectedCats.includes(p.category));
+      }
+
+      const min = parseFloat(document.getElementById('min-price').value) || 0;
+      const max = parseFloat(document.getElementById('max-price').value) || 1000;
+      filtered = filtered.filter(p => p.price >= min && p.price <= max);
+
+      const minRating = parseFloat(document.getElementById('rating-filter').value);
+      if (minRating > 0) {
+        filtered = filtered.filter(p => (p.rating || 0) >= minRating);
+      }
+
+      const sortBy = document.getElementById('sort-by').value;
+      if (sortBy === 'price-low') filtered.sort((a, b) => a.price - b.price);
+      else if (sortBy === 'price-high') filtered.sort((a, b) => b.price - a.price);
+      else if (sortBy === 'rating') filtered.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+
+      displayProducts(filtered);
+    }
+
+    // ==================== CART FUNCTIONS ====================
     function addToCart(productId) {
       if (!currentUser) {
         showToast('Please login first!');
@@ -1533,8 +1318,8 @@
       const cartTotal = document.getElementById('cart-total');
       
       cartItems.innerHTML = cart.map(item => `
-        <div style="display: flex; gap: 15px; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #e2e8f0;">
-          <img src="${item.image}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 12px;">
+        <div class="cart-item">
+          <img src="${item.image || 'https://via.placeholder.com/60'}" alt="${item.name}">
           <div style="flex: 1;">
             <div style="font-weight: 600;">${item.name}</div>
             <div>$${item.price} x ${item.quantity}</div>
@@ -1549,90 +1334,99 @@
       document.getElementById('cart-modal').classList.add('active');
     }
 
-    // ==================== FILTERS AND DISPLAY ====================
-    function loadCategoryFilters() {
-      const categories = [...new Set(products.map(p => p.category))];
-      const container = document.getElementById('category-filters');
-      container.innerHTML = categories.map(cat => `
-        <label class="filter-option">
-          <input type="checkbox" value="${cat}" onchange="applyFilters()"> ${cat}
-        </label>
-      `).join('');
+    async function checkout() {
+      if (!currentUser) {
+        showToast('Please login first');
+        return;
+      }
+
+      if (cart.length === 0) {
+        showToast('Cart is empty');
+        return;
+      }
+
+      const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+      try {
+        await db.collection('orders').add({
+          userId: currentUser.uid,
+          items: cart.map(item => ({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity
+          })),
+          total: total,
+          status: 'pending',
+          date: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        cart = [];
+        updateCart();
+        closeModal('cart-modal');
+        showToast('Order placed successfully!');
+        await loadOrders();
+      } catch (error) {
+        showToast('Error placing order: ' + error.message);
+      }
     }
 
-    function applyFilters() {
-      let filtered = [...products];
+    // ==================== ORDER FUNCTIONS ====================
+    async function loadOrders() {
+      if (!currentUser) return;
+
+      try {
+        const ordersSnapshot = await db.collection('orders')
+          .where('userId', '==', currentUser.uid)
+          .orderBy('date', 'desc')
+          .get();
+
+        orders = ordersSnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+          date: doc.data().date?.toDate() || new Date()
+        }));
+
+        displayOrders();
+      } catch (error) {
+        console.error('Error loading orders:', error);
+      }
+    }
+
+    function displayOrders() {
+      const container = document.getElementById('orders-list');
+      if (!container) return;
       
-      // Category filter
-      const selectedCats = [...document.querySelectorAll('#category-filters input:checked')].map(cb => cb.value);
-      if (selectedCats.length) {
-        filtered = filtered.filter(p => selectedCats.includes(p.category));
+      if (orders.length === 0) {
+        container.innerHTML = '<p style="color: var(--gray); text-align: center;">No orders yet.</p>';
+        return;
       }
 
-      // Price filter
-      const min = parseFloat(document.getElementById('min-price').value) || 0;
-      const max = parseFloat(document.getElementById('max-price').value) || 1000;
-      filtered = filtered.filter(p => p.price >= min && p.price <= max);
-
-      // Rating filter
-      const minRating = parseFloat(document.getElementById('rating-filter').value);
-      if (minRating > 0) {
-        filtered = filtered.filter(p => p.rating >= minRating);
-      }
-
-      // Sort
-      const sortBy = document.getElementById('sort-by').value;
-      if (sortBy === 'price-low') filtered.sort((a, b) => a.price - b.price);
-      else if (sortBy === 'price-high') filtered.sort((a, b) => b.price - a.price);
-      else if (sortBy === 'rating') filtered.sort((a, b) => b.rating - a.rating);
-
-      displayProducts(filtered);
-    }
-
-    function displayProducts(productsToShow) {
-      const grid = document.getElementById('product-grid');
-      grid.innerHTML = productsToShow.map(p => `
-        <div class="product-card">
-          <div class="product-image">
-            <img src="${p.image}" alt="${p.name}" loading="lazy">
+      container.innerHTML = orders.map(order => `
+        <div class="order-card">
+          <div class="order-header">
+            <div>
+              <strong>Order #${order.id.slice(-6)}</strong>
+              <div style="color: var(--gray); font-size: 0.9rem;">${order.date.toLocaleDateString()}</div>
+            </div>
+            <span class="order-status status-${order.status}">${order.status}</span>
           </div>
-          <div class="product-info">
-            <div class="product-name">${p.name}</div>
-            <div class="product-category">${p.category}</div>
-            <div class="product-rating">
-              ${generateStars(p.rating)} (${p.reviews?.length || 0})
-            </div>
-            <div class="product-price">$${p.price.toFixed(2)}</div>
-            <div class="product-actions">
-              <button class="btn-add-cart" onclick="addToCart('${p.id}')">
-                <i class="fas fa-cart-plus"></i> Add to Cart
-              </button>
-              <button class="btn-review" onclick="showReviewModal('${p.id}')">
-                <i class="far fa-star"></i>
-              </button>
-            </div>
+          <div>
+            ${order.items.map(item => `
+              <div style="display: flex; justify-content: space-between; margin: 5px 0;">
+                <span>${item.name} x${item.quantity}</span>
+                <span>$${(item.price * item.quantity).toFixed(2)}</span>
+              </div>
+            `).join('')}
+          </div>
+          <div style="font-weight: 600; text-align: right; margin-top: 10px; padding-top: 10px; border-top: 1px solid #e2e8f0;">
+            Total: $${order.total.toFixed(2)}
           </div>
         </div>
       `).join('');
     }
 
-    function generateStars(rating) {
-      let stars = '';
-      for (let i = 1; i <= 5; i++) {
-        if (i <= Math.floor(rating)) {
-          stars += '<i class="fas fa-star"></i>';
-        } else if (i - rating < 1 && i - rating > 0) {
-          stars += '<i class="fas fa-star-half-alt"></i>';
-        } else {
-          stars += '<i class="far fa-star"></i>';
-        }
-      }
-      return stars;
-    }
-
-    // ==================== REVIEWS ====================
-    let currentReviewProduct = null;
-
+    // ==================== REVIEW FUNCTIONS ====================
     function showReviewModal(productId) {
       if (!currentUser) {
         showToast('Please login to review');
@@ -1641,10 +1435,10 @@
       currentReviewProduct = productId;
       document.getElementById('review-modal').classList.add('active');
       
-      // Reset stars
       document.querySelectorAll('#rating-stars i').forEach(star => {
         star.className = 'far fa-star';
       });
+      delete document.getElementById('rating-stars').dataset.selected;
     }
 
     document.querySelectorAll('#rating-stars i').forEach(star => {
@@ -1706,7 +1500,6 @@
         const reviews = product.reviews || [];
         reviews.push(review);
         
-        // Update average rating
         const avg = reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length;
         const newRating = Math.round(avg * 10) / 10;
 
@@ -1717,13 +1510,14 @@
 
         await loadProducts();
         closeModal('review-modal');
+        document.getElementById('review-text').value = '';
         showToast('Thank you for your review!');
       } catch (error) {
         showToast('Error submitting review: ' + error.message);
       }
     }
 
-    // ==================== SEARCH SUGGESTIONS ====================
+    // ==================== SEARCH FUNCTIONS ====================
     document.getElementById('search-input').addEventListener('input', function(e) {
       const searchTerm = e.target.value.toLowerCase();
       if (searchTerm.length < 2) {
@@ -1732,8 +1526,8 @@
       }
 
       const matches = products.filter(p => 
-        p.name.toLowerCase().includes(searchTerm) || 
-        p.category.toLowerCase().includes(searchTerm)
+        p.name?.toLowerCase().includes(searchTerm) || 
+        p.category?.toLowerCase().includes(searchTerm)
       ).slice(0, 5);
 
       const suggestions = document.getElementById('suggestions');
@@ -1752,19 +1546,310 @@
       document.getElementById('suggestions').classList.remove('active');
       
       const filtered = products.filter(p => 
-        p.name.toLowerCase().includes(productName.toLowerCase())
+        p.name?.toLowerCase().includes(productName.toLowerCase())
       );
       displayProducts(filtered);
     }
 
-    // Close suggestions when clicking outside
     document.addEventListener('click', function(e) {
       if (!e.target.closest('.search-container')) {
         document.getElementById('suggestions').classList.remove('active');
       }
     });
 
-    // ==================== UTILITIES ====================
+    // ==================== ADMIN FUNCTIONS ====================
+    function toggleAdminPanel() {
+      const panel = document.getElementById('admin-panel');
+      if (!currentUser?.isAdmin) {
+        showToast('Admin access required');
+        return;
+      }
+      panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+      if (panel.style.display === 'block') {
+        loadAdminProducts();
+        loadAnalytics();
+      }
+    }
+
+    function switchTab(tab) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      document.getElementById('overview-tab').style.display = 'none';
+      document.getElementById('products-tab').style.display = 'none';
+      document.getElementById('orders-tab').style.display = 'none';
+      document.getElementById('users-tab').style.display = 'none';
+      
+      if (tab === 'overview') {
+        document.getElementById('overview-tab').style.display = 'block';
+        loadAnalytics();
+      } else if (tab === 'products') {
+        document.getElementById('products-tab').style.display = 'block';
+        loadAdminProducts();
+      } else if (tab === 'orders') {
+        document.getElementById('orders-tab').style.display = 'block';
+        loadAllOrders();
+      } else if (tab === 'users') {
+        document.getElementById('users-tab').style.display = 'block';
+        loadAllUsers();
+      }
+    }
+
+    function loadAdminProducts() {
+      const list = document.getElementById('admin-products-list');
+      if (!list) return;
+      
+      list.innerHTML = products.map(p => `
+        <div class="admin-product-item">
+          <img src="${p.image || 'https://via.placeholder.com/50'}" alt="${p.name}">
+          <div style="flex: 1;">
+            <strong>${p.name}</strong><br>
+            <small>$${p.price} | ${p.category}</small>
+          </div>
+          <div class="admin-product-actions">
+            <button class="btn-icon btn-edit" onclick="editProduct('${p.id}')"><i class="fas fa-edit"></i></button>
+            <button class="btn-icon btn-delete" onclick="deleteProduct('${p.id}')"><i class="fas fa-trash"></i></button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function editProduct(id) {
+      const product = products.find(p => p.id === id);
+      if (!product) return;
+      
+      document.getElementById('product-name').value = product.name || '';
+      document.getElementById('product-desc').value = product.desc || '';
+      document.getElementById('product-price').value = product.price || '';
+      document.getElementById('product-category').value = product.category || 'Shirts';
+      document.getElementById('product-image-url').value = product.image || '';
+      document.getElementById('image-preview').innerHTML = `<img src="${product.image || 'https://via.placeholder.com/60'}" alt="Preview">`;
+      document.getElementById('product-form').dataset.editingId = id;
+    }
+
+    async function deleteProduct(id) {
+      if (!currentUser?.isAdmin || !confirm('Delete this product?')) return;
+      
+      try {
+        await db.collection('products').doc(id).delete();
+        showToast('Product deleted');
+        await loadProducts();
+        loadAdminProducts();
+      } catch (error) {
+        showToast('Error deleting product: ' + error.message);
+      }
+    }
+
+    async function saveProduct() {
+      if (!currentUser?.isAdmin) {
+        showToast('Admin access required');
+        return;
+      }
+
+      const name = document.getElementById('product-name').value;
+      const desc = document.getElementById('product-desc').value;
+      const price = parseFloat(document.getElementById('product-price').value);
+      const category = document.getElementById('product-category').value;
+      const imageUrl = document.getElementById('product-image-url').value;
+
+      if (!name || !price) {
+        showToast('Please fill required fields');
+        return;
+      }
+
+      const editingId = document.getElementById('product-form').dataset.editingId;
+      
+      try {
+        const productData = {
+          name,
+          desc,
+          price,
+          category,
+          image: imageUrl || 'https://via.placeholder.com/400',
+          updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        };
+
+        if (editingId) {
+          await db.collection('products').doc(editingId).update(productData);
+          showToast('Product updated!');
+          delete document.getElementById('product-form').dataset.editingId;
+        } else {
+          productData.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+          productData.rating = 0;
+          productData.reviews = [];
+          await db.collection('products').add(productData);
+          showToast('Product added!');
+        }
+
+        // Reset form
+        document.getElementById('product-name').value = '';
+        document.getElementById('product-desc').value = '';
+        document.getElementById('product-price').value = '';
+        document.getElementById('product-image-url').value = '';
+        document.getElementById('image-preview').innerHTML = '<img src="https://via.placeholder.com/60" alt="Preview">';
+        
+        await loadProducts();
+        loadAdminProducts();
+      } catch (error) {
+        showToast('Error saving product: ' + error.message);
+      }
+    }
+
+    // ==================== IMAGE UPLOAD ====================
+    document.getElementById('product-image-file')?.addEventListener('change', async function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        document.getElementById('image-preview').innerHTML = `<img src="${e.target.result}" alt="Preview">`;
+      };
+      reader.readAsDataURL(file);
+
+      try {
+        const progressBar = document.getElementById('upload-progress');
+        const progressBarFill = document.getElementById('upload-progress-bar');
+        
+        progressBar.classList.add('active');
+        
+        const storageRef = storage.ref();
+        const fileRef = storageRef.child(`products/${Date.now()}_${file.name}`);
+        
+        const uploadTask = fileRef.put(file);
+        
+        uploadTask.on('state_changed',
+          (snapshot) => {
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            progressBarFill.style.width = progress + '%';
+          },
+          (error) => {
+            showToast('Upload failed: ' + error.message);
+            progressBar.classList.remove('active');
+          },
+          async () => {
+            const downloadUrl = await uploadTask.snapshot.ref.getDownloadURL();
+            document.getElementById('product-image-url').value = downloadUrl;
+            progressBar.classList.remove('active');
+            showToast('Image uploaded successfully!');
+          }
+        );
+      } catch (error) {
+        showToast('Error uploading image: ' + error.message);
+      }
+    });
+
+    // ==================== ANALYTICS FUNCTIONS ====================
+    async function loadAnalytics() {
+      try {
+        const ordersSnapshot = await db.collection('orders').get();
+        const allOrders = ordersSnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+
+        const usersSnapshot = await db.collection('users').get();
+
+        const totalRevenue = allOrders.reduce((sum, order) => sum + (order.total || 0), 0);
+        const totalOrders = allOrders.length;
+        const totalUsers = usersSnapshot.size;
+
+        document.getElementById('total-revenue').textContent = `$${totalRevenue.toFixed(2)}`;
+        document.getElementById('total-orders').textContent = totalOrders;
+        document.getElementById('total-users').textContent = totalUsers;
+
+        const ctx = document.getElementById('sales-chart').getContext('2d');
+        
+        const last7Days = [];
+        const salesData = [];
+        
+        for (let i = 6; i >= 0; i--) {
+          const date = new Date();
+          date.setDate(date.getDate() - i);
+          const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+          last7Days.push(dateStr);
+          
+          const daySales = allOrders
+            .filter(order => {
+              const orderDate = order.date?.toDate?.() || new Date();
+              return orderDate.toDateString() === date.toDateString();
+            })
+            .reduce((sum, order) => sum + (order.total || 0), 0);
+          
+          salesData.push(daySales);
+        }
+
+        if (salesChart) salesChart.destroy();
+
+        salesChart = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: last7Days,
+            datasets: [{
+              label: 'Sales ($)',
+              data: salesData,
+              borderColor: '#2563eb',
+              backgroundColor: 'rgba(37,99,235,0.1)',
+              tension: 0.4,
+              fill: true
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: { legend: { display: false } }
+          }
+        });
+      } catch (error) {
+        console.error('Error loading analytics:', error);
+      }
+    }
+
+    async function loadAllOrders() {
+      try {
+        const ordersSnapshot = await db.collection('orders').orderBy('date', 'desc').get();
+        const allOrders = ordersSnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+          date: doc.data().date?.toDate() || new Date()
+        }));
+
+        const list = document.getElementById('admin-orders-list');
+        list.innerHTML = allOrders.map(order => `
+          <div class="admin-product-item">
+            <div style="flex: 1;">
+              <strong>Order #${order.id.slice(-6)}</strong><br>
+              <small>User: ${order.userId} | Total: $${order.total}</small>
+            </div>
+            <span class="order-status status-${order.status}">${order.status}</span>
+          </div>
+        `).join('');
+      } catch (error) {
+        console.error('Error loading orders:', error);
+      }
+    }
+
+    async function loadAllUsers() {
+      try {
+        const usersSnapshot = await db.collection('users').get();
+        const allUsers = usersSnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+
+        const list = document.getElementById('admin-users-list');
+        list.innerHTML = allUsers.map(user => `
+          <div class="admin-product-item">
+            <div style="flex: 1;">
+              <strong>${user.name || 'No Name'}</strong><br>
+              <small>${user.email} | ${user.isAdmin ? 'Admin' : 'User'}</small>
+            </div>
+          </div>
+        `).join('');
+      } catch (error) {
+        console.error('Error loading users:', error);
+      }
+    }
+
+    // ==================== UTILITY FUNCTIONS ====================
     function showToast(message) {
       const toast = document.getElementById('toast');
       toast.textContent = message;
@@ -1774,7 +1859,7 @@
       }, 3000);
     }
 
-    // Initial cart update
+    // Initialize
     updateCart();
   </script>
 </body>
