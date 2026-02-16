@@ -7,16 +7,15 @@
   
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
   
   <style>
     /* ==================== GLOBAL STYLES ==================== */
@@ -27,14 +26,14 @@
     }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Inter', 'Noto Sans Bengali', sans-serif;
       background: #f8fafc;
       color: #1e293b;
       line-height: 1.5;
       transition: background-color 0.3s, color 0.3s;
     }
 
-    /* Dark Mode Styles */
+    /* Dark Mode */
     body.dark-mode {
       background: #0f172a;
       color: #f1f5f9;
@@ -44,22 +43,10 @@
     body.dark-mode .product-card,
     body.dark-mode .filters-sidebar,
     body.dark-mode .products-section,
-    body.dark-mode .admin-panel,
-    body.dark-mode .orders-section,
     body.dark-mode .modal-content,
-    body.dark-mode .chat-box,
-    body.dark-mode .suggestions,
     body.dark-mode .payment-modal-content {
       background: #1e293b;
       border-color: #334155;
-    }
-
-    body.dark-mode .product-name,
-    body.dark-mode .filter-section h3,
-    body.dark-mode .nav-link,
-    body.dark-mode .product-category,
-    body.dark-mode .filter-option {
-      color: #f1f5f9;
     }
 
     :root {
@@ -71,7 +58,6 @@
       --dark: #1e293b;
       --light: #f8fafc;
       --gray: #64748b;
-      --gray-light: #e2e8f0;
     }
 
     .container {
@@ -80,7 +66,36 @@
       padding: 0 20px;
     }
 
-    /* ==================== HEADER STYLES ==================== */
+    /* ==================== LANGUAGE SWITCHER ==================== */
+    .lang-switcher {
+      display: flex;
+      gap: 8px;
+      margin-right: 15px;
+    }
+
+    .lang-btn {
+      padding: 6px 12px;
+      border: 1px solid #e2e8f0;
+      border-radius: 20px;
+      background: transparent;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .lang-btn:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .lang-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* ==================== HEADER ==================== */
     .header {
       background: white;
       box-shadow: 0 4px 20px rgba(0,0,0,0.05);
@@ -88,7 +103,6 @@
       top: 0;
       z-index: 100;
       padding: 15px 0;
-      transition: background-color 0.3s;
     }
 
     .header-content {
@@ -96,7 +110,7 @@
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 20px;
+      gap: 15px;
     }
 
     .logo {
@@ -105,30 +119,9 @@
       background: linear-gradient(135deg, var(--primary), var(--secondary));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      cursor: pointer;
     }
 
-    /* Theme Toggle */
-    .theme-toggle {
-      background: none;
-      border: none;
-      font-size: 1.3rem;
-      cursor: pointer;
-      color: var(--gray);
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: 0.2s;
-    }
-
-    .theme-toggle:hover {
-      background: var(--gray-light);
-    }
-
-    /* Search Bar */
+    /* Search */
     .search-container {
       flex: 1;
       max-width: 400px;
@@ -140,8 +133,6 @@
       padding: 12px 20px;
       border: 1px solid #e2e8f0;
       border-radius: 40px;
-      font-size: 1rem;
-      transition: all 0.2s;
       font-family: 'Inter', sans-serif;
     }
 
@@ -170,27 +161,6 @@
       display: block;
     }
 
-    .suggestion-item {
-      padding: 12px 20px;
-      cursor: pointer;
-      transition: 0.2s;
-      border-bottom: 1px solid #e2e8f0;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .suggestion-item:hover {
-      background: #f1f5f9;
-    }
-
-    .suggestion-item img {
-      width: 40px;
-      height: 40px;
-      border-radius: 8px;
-      object-fit: cover;
-    }
-
     /* Navigation */
     .nav-menu {
       display: flex;
@@ -201,12 +171,6 @@
       text-decoration: none;
       color: var(--dark);
       font-weight: 500;
-      transition: 0.2s;
-      position: relative;
-    }
-
-    .nav-link:hover {
-      color: var(--primary);
     }
 
     /* User Menu */
@@ -220,39 +184,20 @@
       position: relative;
       font-size: 1.3rem;
       cursor: pointer;
-      color: var(--dark);
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: 0.2s;
       background: none;
       border: none;
-    }
-
-    .icon-btn:hover {
-      background: var(--gray-light);
+      color: var(--dark);
     }
 
     .badge {
       position: absolute;
-      top: -5px;
-      right: -5px;
+      top: -8px;
+      right: -8px;
       background: var(--secondary);
       color: white;
       font-size: 0.7rem;
-      font-weight: 600;
       padding: 2px 6px;
       border-radius: 20px;
-      min-width: 18px;
-      text-align: center;
-    }
-
-    .auth-buttons {
-      display: flex;
-      gap: 10px;
     }
 
     /* Buttons */
@@ -263,28 +208,16 @@
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s;
-      font-size: 0.95rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
       font-family: 'Inter', sans-serif;
     }
 
     .btn-primary {
       background: var(--primary);
       color: white;
-      box-shadow: 0 4px 12px rgba(37,99,235,0.2);
     }
 
-    .btn-primary:hover:not(:disabled) {
+    .btn-primary:hover {
       background: var(--primary-dark);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(37,99,235,0.3);
-    }
-
-    .btn-primary:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
     }
 
     .btn-outline {
@@ -292,35 +225,18 @@
       border: 1px solid #e2e8f0;
     }
 
-    .btn-outline:hover {
-      background: #f1f5f9;
+    /* ==================== PRODUCT CARD WITH SLIDER ==================== */
+    .main-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 30px;
+      margin: 30px 0;
     }
 
-    .btn-success {
-      background: var(--secondary);
-      color: white;
-    }
-
-    .btn-success:hover {
-      background: #059669;
-    }
-
-    .btn-danger {
-      background: var(--danger);
-      color: white;
-    }
-
-    .btn-sm {
-      padding: 6px 16px;
-      font-size: 0.85rem;
-    }
-
-    /* ==================== PRODUCT CARD WITH THUMBNAIL SLIDER ==================== */
     .product-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 25px;
-      margin: 30px 0;
     }
 
     .product-card {
@@ -328,8 +244,7 @@
       border: 1px solid #e2e8f0;
       border-radius: 20px;
       overflow: hidden;
-      transition: all 0.3s;
-      position: relative;
+      transition: 0.3s;
     }
 
     .product-card:hover {
@@ -337,47 +252,61 @@
       box-shadow: 0 15px 30px rgba(0,0,0,0.1);
     }
 
-    /* Image Slider Container */
-    .product-image-slider {
+    /* Image Slider */
+    .product-slider {
       position: relative;
       width: 100%;
       aspect-ratio: 1;
       overflow: hidden;
     }
 
-    .slider-main-image {
+    .slider-container {
       width: 100%;
       height: 100%;
-      position: relative;
+      display: flex;
+      transition: transform 0.3s ease;
     }
 
-    .slider-main-image img {
+    .slider-container img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.5s ease;
+      flex-shrink: 0;
     }
 
-    .product-card:hover .slider-main-image img {
-      transform: scale(1.1);
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 30px;
+      height: 30px;
+      background: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      opacity: 0;
+      transition: 0.2s;
     }
 
-    /* Thumbnails Container */
+    .product-card:hover .slider-btn {
+      opacity: 1;
+    }
+
+    .slider-btn.left { left: 10px; }
+    .slider-btn.right { right: 10px; }
+
     .thumbnail-container {
       position: absolute;
       bottom: 10px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
-      gap: 8px;
+      gap: 5px;
       background: rgba(255,255,255,0.9);
-      padding: 8px 12px;
-      border-radius: 30px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      z-index: 10;
-      backdrop-filter: blur(5px);
+      padding: 5px 10px;
+      border-radius: 20px;
       opacity: 0;
-      transition: opacity 0.3s;
+      transition: 0.2s;
     }
 
     .product-card:hover .thumbnail-container {
@@ -385,159 +314,64 @@
     }
 
     .thumbnail {
-      width: 40px;
-      height: 40px;
-      border-radius: 8px;
+      width: 30px;
+      height: 30px;
+      border-radius: 5px;
       cursor: pointer;
       border: 2px solid transparent;
-      transition: all 0.2s;
-      overflow: hidden;
+    }
+
+    .thumbnail.active {
+      border-color: var(--primary);
     }
 
     .thumbnail img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      border-radius: 3px;
     }
 
-    .thumbnail:hover {
-      transform: translateY(-2px);
-      border-color: var(--primary);
-    }
-
-    .thumbnail.active {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 2px white, 0 0 0 4px var(--primary);
-    }
-
-    /* Navigation Arrows */
-    .slider-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 30px;
-      height: 30px;
-      background: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      z-index: 20;
-      opacity: 0;
-      transition: opacity 0.3s;
-      border: none;
-    }
-
-    .product-card:hover .slider-arrow {
-      opacity: 1;
-    }
-
-    .slider-arrow:hover {
-      background: var(--primary);
-      color: white;
-    }
-
-    .slider-arrow.left {
-      left: 10px;
-    }
-
-    .slider-arrow.right {
-      right: 10px;
-    }
-
-    /* Product Info */
     .product-info {
       padding: 20px;
     }
 
     .product-name {
       font-weight: 600;
-      font-size: 1.1rem;
       margin-bottom: 5px;
-      color: var(--dark);
-    }
-
-    .product-category {
-      color: var(--gray);
-      font-size: 0.85rem;
-      margin-bottom: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .product-rating {
-      color: #fbbf24;
-      margin: 8px 0;
-      font-size: 0.9rem;
     }
 
     .product-price {
-      font-weight: 700;
       font-size: 1.3rem;
+      font-weight: 700;
       color: var(--primary);
-      margin: 12px 0;
-    }
-
-    .product-stock {
-      font-size: 0.85rem;
-      margin-bottom: 10px;
-    }
-
-    .product-stock.in-stock {
-      color: var(--secondary);
-    }
-
-    .product-stock.low-stock {
-      color: var(--warning);
-    }
-
-    .product-stock.out-of-stock {
-      color: var(--danger);
-    }
-
-    /* Variants */
-    .product-variants {
-      margin: 12px 0;
-    }
-
-    .variant-label {
-      font-size: 0.85rem;
-      color: var(--gray);
-      margin-bottom: 5px;
+      margin: 10px 0;
     }
 
     .size-options {
       display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 10px;
+      gap: 5px;
+      margin: 10px 0;
     }
 
     .size-btn {
-      min-width: 35px;
+      width: 35px;
       height: 35px;
-      border-radius: 8px;
       border: 1px solid #e2e8f0;
       background: white;
+      border-radius: 5px;
       cursor: pointer;
-      font-size: 0.85rem;
-      font-weight: 500;
-      transition: all 0.2s;
     }
 
-    .size-btn:hover,
     .size-btn.active {
       background: var(--primary);
       color: white;
-      border-color: var(--primary);
     }
 
     .color-options {
       display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
+      gap: 5px;
+      margin: 10px 0;
     }
 
     .color-dot {
@@ -546,58 +380,22 @@
       border-radius: 50%;
       cursor: pointer;
       border: 2px solid transparent;
-      transition: all 0.2s;
     }
 
-    .color-dot:hover,
     .color-dot.active {
-      transform: scale(1.2);
       border-color: var(--primary);
-      box-shadow: 0 0 0 2px white, 0 0 0 4px var(--primary);
-    }
-
-    .product-actions {
-      display: flex;
-      gap: 10px;
-      margin-top: 15px;
+      transform: scale(1.2);
     }
 
     .btn-add-cart {
-      flex: 1;
+      width: 100%;
+      padding: 12px;
       background: var(--primary);
       color: white;
       border: none;
-      padding: 12px;
       border-radius: 30px;
       cursor: pointer;
-      font-weight: 500;
-      transition: all 0.2s;
-      font-size: 0.95rem;
-    }
-
-    .btn-add-cart:hover:not(:disabled) {
-      background: var(--primary-dark);
-    }
-
-    .btn-add-cart:disabled {
-      background: #cbd5e1;
-      cursor: not-allowed;
-    }
-
-    .btn-review {
-      width: 45px;
-      height: 45px;
-      border-radius: 30px;
-      border: 1px solid #e2e8f0;
-      background: white;
-      cursor: pointer;
-      transition: all 0.2s;
-      color: var(--gray);
-    }
-
-    .btn-review:hover {
-      background: #f1f5f9;
-      color: var(--primary);
+      margin-top: 10px;
     }
 
     /* ==================== PAYMENT MODAL ==================== */
@@ -612,7 +410,6 @@
       z-index: 2000;
       align-items: center;
       justify-content: center;
-      backdrop-filter: blur(5px);
     }
 
     .payment-modal.active {
@@ -626,349 +423,48 @@
       max-width: 500px;
       max-height: 90vh;
       overflow-y: auto;
-      animation: modalSlideIn 0.3s;
     }
 
     .payment-header {
-      padding: 25px;
+      padding: 20px;
       border-bottom: 1px solid #e2e8f0;
       display: flex;
       justify-content: space-between;
-      align-items: center;
     }
 
-    .payment-header h3 {
-      font-size: 1.3rem;
-      font-weight: 600;
-    }
-
-    .close-payment {
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: var(--gray);
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .close-payment:hover {
-      background: #f1f5f9;
-    }
-
-    .payment-body {
-      padding: 25px;
-    }
-
-    .order-summary {
-      background: #f8fafc;
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 25px;
-    }
-
-    .summary-item {
-      display: flex;
-      justify-content: space-between;
-      margin: 10px 0;
-      color: #475569;
-    }
-
-    .summary-total {
-      display: flex;
-      justify-content: space-between;
-      font-weight: 700;
-      font-size: 1.2rem;
-      margin-top: 15px;
-      padding-top: 15px;
-      border-top: 2px dashed #e2e8f0;
-    }
-
-    /* Payment Methods */
     .payment-methods {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-      margin-bottom: 25px;
+      gap: 10px;
+      padding: 20px;
     }
 
     .payment-method {
+      padding: 15px;
       border: 2px solid #e2e8f0;
-      border-radius: 16px;
-      padding: 20px;
+      border-radius: 12px;
       text-align: center;
       cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .payment-method:hover {
-      border-color: var(--primary);
-      background: #f0f9ff;
     }
 
     .payment-method.selected {
       border-color: var(--primary);
       background: #eff6ff;
-      box-shadow: 0 4px 12px rgba(37,99,235,0.1);
     }
 
-    .payment-method i {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-    }
-
-    .payment-method span {
-      display: block;
-      font-weight: 600;
-    }
-
-    .bkash { color: #e2136e; }
-    .nagad { color: #f5821f; }
-    .rocket { color: #662d91; }
-    .card { color: var(--primary); }
-
-    /* Payment Form */
     .payment-form {
-      margin-top: 20px;
+      padding: 20px;
     }
 
     .form-group {
       margin-bottom: 15px;
     }
 
-    .form-group label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: 500;
-      color: var(--dark);
-    }
-
-    .form-group input,
-    .form-group select {
+    .form-group input {
       width: 100%;
-      padding: 12px 15px;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      font-family: 'Inter', sans-serif;
-    }
-
-    .form-group input:focus,
-    .form-group select:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
-    }
-
-    .card-details {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    /* UPI Apps */
-    .upi-apps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin: 15px 0;
-    }
-
-    .upi-app {
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
       padding: 12px;
-      text-align: center;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .upi-app:hover {
-      background: #f1f5f9;
-    }
-
-    .upi-app.selected {
-      background: var(--primary);
-      color: white;
-      border-color: var(--primary);
-    }
-
-    .upi-app img {
-      width: 30px;
-      height: 30px;
-      margin-bottom: 5px;
-    }
-
-    .payment-footer {
-      padding: 20px 25px;
-      border-top: 1px solid #e2e8f0;
-      display: flex;
-      gap: 15px;
-    }
-
-    .payment-footer button {
-      flex: 1;
-      padding: 14px;
-    }
-
-    /* Success Animation */
-    .payment-success {
-      text-align: center;
-      padding: 40px;
-    }
-
-    .success-animation {
-      width: 80px;
-      height: 80px;
-      margin: 0 auto 20px;
-      background: var(--secondary);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      animation: scaleIn 0.5s;
-    }
-
-    .success-animation i {
-      font-size: 40px;
-      color: white;
-    }
-
-    @keyframes scaleIn {
-      from {
-        transform: scale(0);
-      }
-      to {
-        transform: scale(1);
-      }
-    }
-
-    /* ==================== FILTERS SIDEBAR ==================== */
-    .filters-sidebar {
-      background: white;
-      border-radius: 24px;
-      padding: 25px;
-      position: sticky;
-      top: 100px;
-      height: fit-content;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    }
-
-    .filter-section {
-      margin-bottom: 25px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid #e2e8f0;
-    }
-
-    .filter-section h3 {
-      font-size: 1rem;
-      margin-bottom: 15px;
-      color: var(--dark);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .filter-option {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
-      cursor: pointer;
-      color: #475569;
-    }
-
-    .price-inputs {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .price-inputs input {
-      width: 100px;
-      padding: 8px;
       border: 1px solid #e2e8f0;
       border-radius: 8px;
-    }
-
-    .sort-select {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      font-family: 'Inter', sans-serif;
-    }
-
-    /* ==================== MAIN LAYOUT ==================== */
-    .main-layout {
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: 30px;
-      margin: 30px 0;
-    }
-
-    .products-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 25px;
-    }
-
-    .product-count {
-      color: var(--gray);
-      font-size: 0.95rem;
-      background: #f1f5f9;
-      padding: 5px 12px;
-      border-radius: 30px;
-    }
-
-    /* ==================== CART MODAL ==================== */
-    .cart-item {
-      display: flex;
-      gap: 15px;
-      margin-bottom: 15px;
-      padding-bottom: 15px;
-      border-bottom: 1px solid #e2e8f0;
-    }
-
-    .cart-item img {
-      width: 70px;
-      height: 70px;
-      object-fit: cover;
-      border-radius: 12px;
-    }
-
-    .cart-item-details {
-      flex: 1;
-    }
-
-    .cart-item-title {
-      font-weight: 600;
-    }
-
-    .cart-item-price {
-      color: var(--primary);
-      font-weight: 600;
-    }
-
-    .cart-item-remove {
-      color: var(--danger);
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 0.9rem;
-      padding: 5px;
-    }
-
-    .cart-total {
-      font-weight: 700;
-      font-size: 1.2rem;
-      text-align: right;
-      margin-top: 20px;
-      padding-top: 20px;
-      border-top: 2px solid #e2e8f0;
     }
 
     /* ==================== MODALS ==================== */
@@ -995,23 +491,15 @@
       border-radius: 24px;
       width: 90%;
       max-width: 500px;
-      max-height: 80vh;
-      overflow-y: auto;
-      position: relative;
     }
 
     .close-modal {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      background: none;
-      border: none;
+      float: right;
       font-size: 1.5rem;
       cursor: pointer;
-      color: var(--gray);
     }
 
-    /* ==================== TOAST ==================== */
+    /* Toast */
     .toast {
       position: fixed;
       bottom: 30px;
@@ -1020,49 +508,16 @@
       color: white;
       padding: 15px 30px;
       border-radius: 50px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
       z-index: 3000;
       display: none;
-      animation: slideIn 0.3s;
     }
 
-    @keyframes slideIn {
-      from {
-        transform: translateX(100%);
-        opacity: 0;
-      }
-      to {
-        transform: translateX(0);
-        opacity: 1;
-      }
-    }
-
-    /* Responsive */
     @media (max-width: 768px) {
       .main-layout {
         grid-template-columns: 1fr;
       }
-      
-      .filters-sidebar {
-        position: static;
-      }
-      
-      .header-content {
-        flex-direction: column;
-        text-align: center;
-      }
-      
       .nav-menu {
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      
-      .product-grid {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      }
-      
-      .payment-methods {
-        grid-template-columns: 1fr;
+        display: none;
       }
     }
   </style>
@@ -1071,160 +526,86 @@
   <!-- Header -->
   <header class="header">
     <div class="container header-content">
-      <div class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">STYLE HUB</div>
+      <div class="logo">STYLE HUB</div>
 
-      <!-- Search Bar -->
+      <!-- Language Switcher -->
+      <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="en" onclick="changeLanguage('en')">EN</button>
+        <button class="lang-btn" data-lang="bn" onclick="changeLanguage('bn')">বাং</button>
+        <button class="lang-btn" data-lang="hi" onclick="changeLanguage('hi')">हि</button>
+      </div>
+
+      <!-- Search -->
       <div class="search-container">
-        <input type="text" class="search-box" id="search-input" placeholder="Search 70+ products...">
+        <input type="text" class="search-box" id="search-input" placeholder="Search products...">
         <div class="suggestions" id="suggestions"></div>
       </div>
 
-      <!-- Navigation -->
-      <nav class="nav-menu">
-        <a href="#" class="nav-link">Home</a>
-        <a href="#" class="nav-link">Shop</a>
-        <a href="#" class="nav-link">New</a>
-        <a href="#" class="nav-link">Sale</a>
-      </nav>
-
       <!-- User Menu -->
       <div class="user-menu">
-        <button class="icon-btn theme-toggle" onclick="toggleTheme()">
+        <button class="icon-btn" onclick="toggleTheme()">
           <i class="fas fa-moon"></i>
         </button>
-        
         <button class="icon-btn" onclick="showWishlist()">
           <i class="far fa-heart"></i>
           <span class="badge" id="wishlist-count">0</span>
         </button>
-        
-        <button class="icon-btn" onclick="showCompare()">
-          <i class="fas fa-balance-scale"></i>
-          <span class="badge" id="compare-count">0</span>
-        </button>
-        
         <button class="icon-btn" onclick="showCart()">
           <i class="fas fa-shopping-bag"></i>
           <span class="badge" id="cart-count">0</span>
         </button>
-        
         <div class="auth-buttons" id="auth-buttons">
-          <button class="btn btn-outline btn-sm" onclick="showModal('auth-modal', 'login')">Login</button>
-          <button class="btn btn-primary btn-sm" onclick="showModal('auth-modal', 'register')">Register</button>
+          <button class="btn btn-outline" onclick="showModal('auth-modal', 'login')" data-key="login">Login</button>
+          <button class="btn btn-primary" onclick="showModal('auth-modal', 'register')" data-key="register">Register</button>
         </div>
       </div>
     </div>
   </header>
 
   <div class="container">
-    <!-- Admin Toggle -->
-    <div id="admin-toggle" style="display: none; text-align: right; margin: 20px 0;">
-      <button class="btn btn-outline" onclick="toggleAdminPanel()">
-        <i class="fas fa-cog"></i> Admin Dashboard
-      </button>
-    </div>
-
     <!-- Main Layout -->
     <div class="main-layout">
-      <!-- Filters Sidebar -->
+      <!-- Filters -->
       <aside class="filters-sidebar">
-        <h3 style="margin-bottom: 20px;">Filters</h3>
-        
+        <h3 data-key="filters">Filters</h3>
         <div class="filter-section">
-          <h3>Categories</h3>
+          <h4 data-key="categories">Categories</h4>
           <div id="category-filters"></div>
         </div>
-
         <div class="filter-section">
-          <h3>Price Range</h3>
-          <div class="price-inputs">
-            <input type="number" id="min-price" placeholder="Min" value="0">
-            <span>-</span>
-            <input type="number" id="max-price" placeholder="Max" value="1000">
-          </div>
+          <h4 data-key="price">Price Range</h4>
+          <input type="range" min="0" max="1000" value="500" onchange="applyFilters()">
         </div>
-
-        <div class="filter-section">
-          <h3>Sizes</h3>
-          <div class="filter-option">
-            <input type="checkbox" value="S" onchange="applyFilters()"> Small (S)
-          </div>
-          <div class="filter-option">
-            <input type="checkbox" value="M" onchange="applyFilters()"> Medium (M)
-          </div>
-          <div class="filter-option">
-            <input type="checkbox" value="L" onchange="applyFilters()"> Large (L)
-          </div>
-          <div class="filter-option">
-            <input type="checkbox" value="XL" onchange="applyFilters()"> X Large (XL)
-          </div>
-        </div>
-
-        <div class="filter-section">
-          <h3>Rating</h3>
-          <select class="sort-select" id="rating-filter" onchange="applyFilters()">
-            <option value="0">All Ratings</option>
-            <option value="4">4★ & above</option>
-            <option value="3">3★ & above</option>
-            <option value="2">2★ & above</option>
-          </select>
-        </div>
-
-        <div class="filter-section">
-          <h3>Sort By</h3>
-          <select class="sort-select" id="sort-by" onchange="applyFilters()">
-            <option value="default">Default</option>
-            <option value="price-low">Price: Low to High</option>
-            <option value="price-high">Price: High to Low</option>
-            <option value="rating">Top Rated</option>
-          </select>
-        </div>
-
-        <button class="btn btn-primary" style="width: 100%;" onclick="applyFilters()">
-          <i class="fas fa-filter"></i> Apply Filters
-        </button>
       </aside>
 
-      <!-- Products Section -->
+      <!-- Products -->
       <section class="products-section">
         <div class="products-header">
-          <h2>All Products</h2>
-          <span class="product-count" id="product-count">70 products</span>
+          <h2 data-key="products">Products</h2>
+          <span id="product-count">70 products</span>
         </div>
         <div class="product-grid" id="product-grid"></div>
       </section>
     </div>
-
-    <!-- Order History -->
-    <section class="orders-section" id="orders-section" style="display: none;">
-      <h2>My Orders</h2>
-      <div id="orders-list"></div>
-    </section>
   </div>
 
   <!-- Payment Modal -->
   <div class="payment-modal" id="payment-modal">
-    <div class="payment-modal-content">
-      <div class="payment-header">
-        <h3>Complete Payment</h3>
-        <button class="close-payment" onclick="closePaymentModal()">&times;</button>
-      </div>
-      <div class="payment-body" id="payment-body">
-        <!-- Payment content will be loaded here -->
-      </div>
+    <div class="payment-modal-content" id="payment-content">
+      <!-- Dynamic payment content -->
     </div>
   </div>
 
   <!-- Auth Modal -->
   <div class="modal" id="auth-modal">
     <div class="modal-content">
-      <button class="close-modal" onclick="closeModal('auth-modal')">&times;</button>
+      <span class="close-modal" onclick="closeModal('auth-modal')">&times;</span>
       <h2 id="auth-title">Login</h2>
-      <form class="auth-form" onsubmit="handleAuth(event)">
+      <form onsubmit="handleAuth(event)">
         <input type="text" id="auth-name" placeholder="Full Name" style="display: none;">
         <input type="email" id="auth-email" placeholder="Email" required>
         <input type="password" id="auth-password" placeholder="Password" required>
-        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 15px;">Continue</button>
+        <button type="submit" class="btn btn-primary" style="width:100%; margin-top:15px;">Continue</button>
       </form>
     </div>
   </div>
@@ -1232,13 +613,11 @@
   <!-- Cart Modal -->
   <div class="modal" id="cart-modal">
     <div class="modal-content">
-      <button class="close-modal" onclick="closeModal('cart-modal')">&times;</button>
-      <h3 style="margin-bottom: 20px;">Shopping Cart</h3>
-      <div id="cart-items" style="max-height: 400px; overflow-y: auto;"></div>
+      <span class="close-modal" onclick="closeModal('cart-modal')">&times;</span>
+      <h3 data-key="cart">Shopping Cart</h3>
+      <div id="cart-items"></div>
       <div class="cart-total" id="cart-total">Total: $0.00</div>
-      <button class="btn btn-primary" style="width: 100%; margin-top: 20px;" onclick="proceedToPayment()">
-        Proceed to Payment
-      </button>
+      <button class="btn btn-primary" style="width:100%; margin-top:20px;" onclick="proceedToPayment()" data-key="checkout">Checkout</button>
     </div>
   </div>
 
@@ -1260,210 +639,551 @@
     const auth = firebase.auth();
     const db = firebase.firestore();
 
-    // ==================== GLOBAL VARIABLES ====================
-    let currentUser = null;
-    let products = [];
-    let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-    let compareList = JSON.parse(localStorage.getItem('compareList')) || [];
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    let selectedPaymentMethod = 'bkash';
-    let currentOrderTotal = 0;
+    // ==================== LANGUAGE TRANSLATIONS ====================
+    const translations = {
+      en: {
+        login: 'Login',
+        register: 'Register',
+        logout: 'Logout',
+        filters: 'Filters',
+        categories: 'Categories',
+        price: 'Price Range',
+        products: 'Products',
+        cart: 'Shopping Cart',
+        checkout: 'Checkout',
+        'add-to-cart': 'Add to Cart',
+        'wishlist': 'Wishlist',
+        'compare': 'Compare',
+        'search': 'Search products...'
+      },
+      bn: {
+        login: 'লগইন',
+        register: 'রেজিস্টার',
+        logout: 'লগআউট',
+        filters: 'ফিল্টার',
+        categories: 'ক্যাটাগরি',
+        price: 'মূল্য সীমা',
+        products: 'পণ্য',
+        cart: 'শপিং কার্ট',
+        checkout: 'চেকআউট',
+        'add-to-cart': 'কার্টে যোগ করুন',
+        'wishlist': 'পছন্দের তালিকা',
+        'compare': 'তুলনা',
+        'search': 'পণ্য খুঁজুন...'
+      },
+      hi: {
+        login: 'लॉगिन',
+        register: 'रजिस्टर',
+        logout: 'लॉगआउट',
+        filters: 'फ़िल्टर',
+        categories: 'श्रेणियाँ',
+        price: 'मूल्य सीमा',
+        products: 'उत्पाद',
+        cart: 'कार्ट',
+        checkout: 'चेकआउट',
+        'add-to-cart': 'कार्ट में जोड़ें',
+        'wishlist': 'पसंदीदा',
+        'compare': 'तुलना',
+        'search': 'उत्पाद खोजें...'
+      }
+    };
 
-    // ==================== 70+ PRODUCTS WITH MULTIPLE IMAGES ====================
-    const productsData = [
-      // Shirts (15 products)
-      { 
-        id: 1, 
-        name: 'Classic Oxford Shirt', 
-        desc: 'Premium cotton, wrinkle-free, perfect for office', 
-        price: 49.99, 
-        category: 'Shirts', 
+    // ==================== LANGUAGE FUNCTION ====================
+    function changeLanguage(lang) {
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+
+      document.querySelectorAll('[data-key]').forEach(el => {
+        const key = el.getAttribute('data-key');
+        if (translations[lang] && translations[lang][key]) {
+          if (el.tagName === 'INPUT' && el.placeholder) {
+            el.placeholder = translations[lang][key];
+          } else {
+            el.textContent = translations[lang][key];
+          }
+        }
+      });
+
+      const searchInput = document.getElementById('search-input');
+      if (searchInput) {
+        searchInput.placeholder = translations[lang].search;
+      }
+    }
+
+    // ==================== PRODUCTS WITH MULTIPLE IMAGES ====================
+    const products = [
+      {
+        id: 1,
+        name: 'Classic Oxford Shirt',
+        price: 49.99,
+        category: 'Shirts',
         images: [
           'https://images.unsplash.com/photo-1598033129075-9c5f7c7f3c7a?w=400',
           'https://images.unsplash.com/photo-1603252109303-2751441dd157?w=400',
-          'https://images.unsplash.com/photo-1598032895397-b9472444bf93?w=400',
-          'https://images.unsplash.com/photo-1604695573708-5313a4c2d4d8?w=400'
+          'https://images.unsplash.com/photo-1598032895397-b9472444bf93?w=400'
         ],
-        rating: 4.5, 
-        sizes: ['S', 'M', 'L', 'XL'], 
-        colors: ['White', 'Blue', 'Pink'], 
-        stock: 45 
+        sizes: ['S', 'M', 'L', 'XL'],
+        colors: ['White', 'Blue', 'Black'],
+        stock: 45,
+        rating: 4.5
       },
-      { 
-        id: 2, 
-        name: 'Slim Fit Denim Shirt', 
-        desc: 'Casual denim, button-down, rugged look', 
-        price: 59.99, 
-        category: 'Shirts', 
-        images: [
-          'https://images.unsplash.com/photo-1589310243389-96a5483213a8?w=400',
-          'https://images.unsplash.com/photo-1602293589930-45aad59ba3ab?w=400',
-          'https://images.unsplash.com/photo-1589310243389-96a5483213a8?w=400'
-        ],
-        rating: 4.3, 
-        sizes: ['M', 'L', 'XL'], 
-        colors: ['Blue', 'Black'], 
-        stock: 30 
-      },
-      { 
-        id: 3, 
-        name: 'Linen Casual Shirt', 
-        desc: 'Breathable linen, perfect for summer', 
-        price: 44.99, 
-        category: 'Shirts', 
-        images: [
-          'https://images.unsplash.com/photo-1602810316693-3667c854239a?w=400',
-          'https://images.unsplash.com/photo-1598033129075-9c5f7c7f3c7a?w=400',
-          'https://images.unsplash.com/photo-1603252109303-2751441dd157?w=400'
-        ],
-        rating: 4.7, 
-        sizes: ['S', 'M', 'L'], 
-        colors: ['Beige', 'White', 'Gray'], 
-        stock: 38 
-      },
-      
-      // T-Shirts (15 products)
-      { 
-        id: 16, 
-        name: 'Cotton Graphic Tee', 
-        desc: '100% cotton, printed design', 
-        price: 24.99, 
-        category: 'T-Shirts', 
-        images: [
-          'https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=400',
-          'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400',
-          'https://images.unsplash.com/photo-1503342394128-c104d54dba01?w=400'
-        ],
-        rating: 4.2, 
-        sizes: ['S', 'M', 'L', 'XL'], 
-        colors: ['Black', 'White', 'Gray'], 
-        stock: 60 
-      },
-      
-      // Jeans (8 products)
-      { 
-        id: 31, 
-        name: 'Slim Fit Jeans', 
-        desc: 'Stretch denim, classic blue', 
-        price: 79.99, 
-        category: 'Jeans', 
-        images: [
-          'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=400',
-          'https://images.unsplash.com/photo-1582552938357-32b906df40cb?w=400',
-          'https://images.unsplash.com/photo-1542272604-787c3835535d?w=400'
-        ],
-        rating: 4.6, 
-        sizes: ['30', '32', '34', '36', '38'], 
-        colors: ['Blue', 'Black', 'Gray'], 
-        stock: 48 
-      },
-      
-      // Footwear (12 products)
-      { 
-        id: 42, 
-        name: 'Running Sneakers', 
-        desc: 'Lightweight mesh, cushioned sole', 
-        price: 89.99, 
-        category: 'Footwear', 
+      {
+        id: 2,
+        name: 'Running Sneakers',
+        price: 89.99,
+        category: 'Footwear',
         images: [
           'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400',
           'https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=400',
           'https://images.unsplash.com/photo-1608256246200-53e635b7089d?w=400'
         ],
-        rating: 4.7, 
-        sizes: ['7', '8', '9', '10', '11', '12'], 
-        colors: ['White', 'Black', 'Blue'], 
-        stock: 52 
+        sizes: ['7', '8', '9', '10', '11'],
+        colors: ['White', 'Black', 'Blue'],
+        stock: 52,
+        rating: 4.7
       },
-      
-      // Watches (5 products)
-      { 
-        id: 55, 
-        name: 'Chronograph Watch', 
-        desc: 'Stainless steel, water resistant', 
-        price: 149.99, 
-        category: 'Watches', 
+      {
+        id: 3,
+        name: 'Leather Watch',
+        price: 149.99,
+        category: 'Watches',
         images: [
           'https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=400',
           'https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?w=400',
           'https://images.unsplash.com/photo-1539874754764-5a96559165b0?w=400'
         ],
-        rating: 4.8, 
-        sizes: ['One Size'], 
-        colors: ['Silver', 'Gold', 'Black'], 
-        stock: 25 
+        sizes: ['One Size'],
+        colors: ['Brown', 'Black'],
+        stock: 25,
+        rating: 4.8
       }
     ];
 
     // Generate 70 products
-    for (let i = 0; i < 70; i++) {
-      const baseProduct = productsData[i % productsData.length];
+    for (let i = 4; i <= 70; i++) {
+      const base = products[i % 3];
       products.push({
-        id: i + 1,
-        name: `${baseProduct.name} ${Math.floor(i/7) + 1}`,
-        desc: baseProduct.desc,
-        price: baseProduct.price + (i % 20),
-        category: baseProduct.category,
-        images: baseProduct.images,
-        rating: Math.min(5, 3.5 + (i % 15) / 10),
-        sizes: baseProduct.sizes,
-        colors: baseProduct.colors,
-        stock: Math.max(0, 50 - i)
+        id: i,
+        name: `${base.name} ${i}`,
+        price: base.price + (i % 20),
+        category: base.category,
+        images: base.images,
+        sizes: base.sizes,
+        colors: base.colors,
+        stock: 20 + (i % 50),
+        rating: 3.5 + (i % 15) / 10
       });
     }
 
-    // ==================== AUTH FUNCTIONS ====================
-    auth.onAuthStateChanged(async (user) => {
-      if (user) {
-        try {
-          const userDoc = await db.collection('users').doc(user.uid).get();
-          if (userDoc.exists) {
-            currentUser = { uid: user.uid, ...userDoc.data() };
-          } else {
-            const isAdmin = (await db.collection('users').get()).empty;
-            const userData = {
-              name: user.email.split('@')[0],
-              email: user.email,
-              isAdmin: isAdmin,
-              createdAt: new Date().toISOString()
-            };
-            await db.collection('users').doc(user.uid).set(userData);
-            currentUser = { uid: user.uid, ...userData };
-          }
-          updateUIForUser();
-          showToast(`Welcome back, ${currentUser.name}!`);
-        } catch (error) {
-          showToast('Error loading user');
+    // ==================== GLOBAL VARIABLES ====================
+    let currentUser = null;
+    let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let currentSlide = {};
+    let selectedSizes = {};
+    let selectedColors = {};
+
+    // ==================== DISPLAY PRODUCTS WITH SLIDER ====================
+    function displayProducts() {
+      const grid = document.getElementById('product-grid');
+      
+      grid.innerHTML = products.map(p => {
+        const slides = p.images.map((img, idx) => `
+          <img src="${img}" alt="${p.name}" data-index="${idx}">
+        `).join('');
+
+        const thumbnails = p.images.map((img, idx) => `
+          <div class="thumbnail ${idx === 0 ? 'active' : ''}" onclick="setSlide(${p.id}, ${idx})">
+            <img src="${img}" alt="thumb">
+          </div>
+        `).join('');
+
+        const wishlisted = wishlist.includes(p.id) ? 'fas' : 'far';
+
+        return `
+        <div class="product-card" data-id="${p.id}">
+          <div class="product-slider" id="slider-${p.id}">
+            <div class="slider-container" id="slider-container-${p.id}" style="transform: translateX(0px);">
+              ${slides}
+            </div>
+            <button class="slider-btn left" onclick="slide(${p.id}, -1)">❮</button>
+            <button class="slider-btn right" onclick="slide(${p.id}, 1)">❯</button>
+            <div class="thumbnail-container">
+              ${thumbnails}
+            </div>
+          </div>
+          <div class="product-info">
+            <div class="product-name">${p.name}</div>
+            <div class="product-price">$${p.price}</div>
+            
+            <div class="size-options">
+              ${p.sizes.map(s => `
+                <button class="size-btn" onclick="selectSize(${p.id}, '${s}')">${s}</button>
+              `).join('')}
+            </div>
+            
+            <div class="color-options">
+              ${p.colors.map(c => `
+                <span class="color-dot" style="background: ${c.toLowerCase()};" 
+                      onclick="selectColor(${p.id}, '${c}')"></span>
+              `).join('')}
+            </div>
+            
+            <button class="btn-add-cart" onclick="addToCart(${p.id})">
+              <i class="fas fa-cart-plus"></i> Add to Cart
+            </button>
+          </div>
+        </div>
+      `}).join('');
+
+      updateCounts();
+    }
+
+    // Slider Functions
+    window.slide = function(productId, direction) {
+      const container = document.getElementById(`slider-container-${productId}`);
+      const currentTransform = container.style.transform;
+      const currentX = currentTransform ? parseInt(currentTransform.split('(')[1]) : 0;
+      const newX = currentX - (direction * 100);
+      const maxX = -((products.find(p => p.id === productId).images.length - 1) * 100);
+      
+      if (newX <= 0 && newX >= maxX) {
+        container.style.transform = `translateX(${newX}%)`;
+        updateActiveThumbnail(productId, Math.abs(newX / 100));
+      }
+    };
+
+    window.setSlide = function(productId, index) {
+      const container = document.getElementById(`slider-container-${productId}`);
+      container.style.transform = `translateX(-${index * 100}%)`;
+      updateActiveThumbnail(productId, index);
+    };
+
+    function updateActiveThumbnail(productId, activeIndex) {
+      const thumbnails = document.querySelectorAll(`#slider-${productId} .thumbnail`);
+      thumbnails.forEach((t, i) => {
+        t.classList.toggle('active', i === activeIndex);
+      });
+    }
+
+    // Size/Color Selection
+    window.selectSize = function(productId, size) {
+      selectedSizes[productId] = size;
+      document.querySelectorAll(`[data-id="${productId}"] .size-btn`).forEach(btn => {
+        btn.classList.toggle('active', btn.textContent === size);
+      });
+    };
+
+    window.selectColor = function(productId, color) {
+      selectedColors[productId] = color;
+      document.querySelectorAll(`[data-id="${productId}"] .color-dot`).forEach(dot => {
+        dot.classList.toggle('active', dot.style.backgroundColor === color.toLowerCase());
+      });
+    };
+
+    // ==================== CART FUNCTIONS ====================
+    window.addToCart = function(productId) {
+      if (!currentUser) {
+        showToast('Please login first');
+        return;
+      }
+
+      const product = products.find(p => p.id === productId);
+      const size = selectedSizes[productId] || product.sizes[0];
+      const color = selectedColors[productId] || product.colors[0];
+
+      const cartItem = cart.find(item => 
+        item.id === productId && item.size === size && item.color === color
+      );
+
+      if (cartItem) {
+        if (cartItem.quantity < product.stock) {
+          cartItem.quantity++;
+        } else {
+          showToast('Out of stock');
+          return;
         }
       } else {
-        currentUser = null;
-        updateUIForUser();
+        cart.push({ ...product, quantity: 1, size, color });
       }
-      displayProducts(products);
+
+      updateCart();
+      showToast('Added to cart!');
+    };
+
+    function updateCart() {
+      const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+      document.getElementById('cart-count').textContent = count;
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    window.showCart = function() {
+      const modal = document.getElementById('cart-modal');
+      const itemsDiv = document.getElementById('cart-items');
+      const totalDiv = document.getElementById('cart-total');
+
+      if (cart.length === 0) {
+        itemsDiv.innerHTML = '<p style="text-align:center; color:var(--gray);">Cart is empty</p>';
+        totalDiv.textContent = 'Total: $0.00';
+      } else {
+        itemsDiv.innerHTML = cart.map(item => `
+          <div style="display:flex; gap:15px; margin-bottom:15px; padding-bottom:15px; border-bottom:1px solid #e2e8f0;">
+            <img src="${item.images[0]}" style="width:60px; height:60px; object-fit:cover; border-radius:8px;">
+            <div style="flex:1;">
+              <div style="font-weight:600;">${item.name}</div>
+              <div style="font-size:0.9rem; color:var(--gray);">${item.size} | ${item.color}</div>
+              <div>$${item.price} x ${item.quantity}</div>
+            </div>
+            <div>
+              <div style="font-weight:600;">$${(item.price * item.quantity).toFixed(2)}</div>
+              <button onclick="removeFromCart('${item.id}_${item.size}_${item.color}')" style="color:var(--danger); background:none; border:none; cursor:pointer;">Remove</button>
+            </div>
+          </div>
+        `).join('');
+
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        totalDiv.textContent = `Total: $${total.toFixed(2)}`;
+      }
+
+      modal.classList.add('active');
+    };
+
+    window.removeFromCart = function(itemKey) {
+      const [id, size, color] = itemKey.split('_');
+      cart = cart.filter(item => !(item.id == id && item.size === size && item.color === color));
+      updateCart();
+      showCart();
+    };
+
+    // ==================== PAYMENT SYSTEM ====================
+    window.proceedToPayment = function() {
+      closeModal('cart-modal');
+      const modal = document.getElementById('payment-modal');
+      const content = document.getElementById('payment-content');
+      
+      const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      const shipping = subtotal > 100 ? 0 : 10;
+      const total = subtotal + shipping;
+
+      content.innerHTML = `
+        <div class="payment-header">
+          <h3>Complete Payment</h3>
+          <span class="close-modal" onclick="closePaymentModal()">&times;</span>
+        </div>
+        
+        <div style="padding:20px;">
+          <div style="background:#f8fafc; padding:20px; border-radius:12px; margin-bottom:20px;">
+            <h4>Order Summary</h4>
+            <div style="display:flex; justify-content:space-between; margin:10px 0;">
+              <span>Subtotal</span>
+              <span>$${subtotal.toFixed(2)}</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; margin:10px 0;">
+              <span>Shipping</span>
+              <span>${shipping === 0 ? 'Free' : '$' + shipping}</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-weight:700; margin-top:15px; padding-top:15px; border-top:2px dashed #e2e8f0;">
+              <span>Total</span>
+              <span>$${total.toFixed(2)}</span>
+            </div>
+          </div>
+
+          <h4 style="margin-bottom:15px;">Select Payment Method</h4>
+          <div class="payment-methods">
+            <div class="payment-method" onclick="selectPaymentMethod('bkash')">
+              <i class="fas fa-mobile-alt" style="color:#E2136E; font-size:2rem;"></i>
+              <div>bKash</div>
+            </div>
+            <div class="payment-method" onclick="selectPaymentMethod('nagad')">
+              <i class="fas fa-mobile-alt" style="color:#F5821F; font-size:2rem;"></i>
+              <div>Nagad</div>
+            </div>
+            <div class="payment-method" onclick="selectPaymentMethod('rocket')">
+              <i class="fas fa-mobile-alt" style="color:#662D91; font-size:2rem;"></i>
+              <div>Rocket</div>
+            </div>
+            <div class="payment-method" onclick="selectPaymentMethod('card')">
+              <i class="fas fa-credit-card" style="color:#2563EB; font-size:2rem;"></i>
+              <div>Card</div>
+            </div>
+          </div>
+
+          <div id="payment-form" class="payment-form">
+            <!-- Dynamic form -->
+          </div>
+
+          <button class="btn btn-primary" style="width:100%; margin-top:20px;" onclick="processPayment()">Pay Now</button>
+        </div>
+      `;
+
+      modal.classList.add('active');
+    };
+
+    window.selectPaymentMethod = function(method) {
+      document.querySelectorAll('.payment-method').forEach(el => {
+        el.classList.remove('selected');
+      });
+      event.currentTarget.classList.add('selected');
+
+      const formDiv = document.getElementById('payment-form');
+      
+      if (method === 'bkash' || method === 'nagad' || method === 'rocket') {
+        formDiv.innerHTML = `
+          <div class="form-group">
+            <label>Mobile Number</label>
+            <input type="tel" id="mobile" placeholder="01XXXXXXXXX">
+          </div>
+          <div class="form-group">
+            <label>Transaction ID</label>
+            <input type="text" id="trxid" placeholder="Enter transaction ID">
+          </div>
+          <div style="background:#f1f5f9; padding:15px; border-radius:8px; margin:15px 0;">
+            <p>Send money to 019XXXXXXXX and enter transaction ID above</p>
+          </div>
+        `;
+      } else {
+        formDiv.innerHTML = `
+          <div class="form-group">
+            <label>Card Number</label>
+            <input type="text" id="card" placeholder="1234 5678 9012 3456">
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+            <div class="form-group">
+              <label>Expiry</label>
+              <input type="text" id="expiry" placeholder="MM/YY">
+            </div>
+            <div class="form-group">
+              <label>CVV</label>
+              <input type="text" id="cvv" placeholder="123">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Card Holder</label>
+            <input type="text" id="name" placeholder="Name on card">
+          </div>
+        `;
+      }
+    };
+
+    window.processPayment = function() {
+      showToast('Processing payment...');
+      
+      setTimeout(() => {
+        showToast('Payment successful! 🎉');
+        cart = [];
+        updateCart();
+        closePaymentModal();
+        closeModal('cart-modal');
+      }, 2000);
+    };
+
+    function closePaymentModal() {
+      document.getElementById('payment-modal').classList.remove('active');
+    }
+
+    // ==================== WISHLIST ====================
+    window.toggleWishlist = function(productId) {
+      const index = wishlist.indexOf(productId);
+      if (index === -1) {
+        wishlist.push(productId);
+      } else {
+        wishlist.splice(index, 1);
+      }
+      localStorage.setItem('wishlist', JSON.stringify(wishlist));
+      updateCounts();
+      displayProducts(); // Refresh to update heart icons
+    };
+
+    window.showWishlist = function() {
+      if (wishlist.length === 0) {
+        showToast('Wishlist is empty');
+        return;
+      }
+
+      const wishlistProducts = products.filter(p => wishlist.includes(p.id));
+      const html = wishlistProducts.map(p => `
+        <div style="text-align:center; padding:15px; background:#f8fafc; border-radius:12px;">
+          <img src="${p.images[0]}" style="width:100%; height:100px; object-fit:cover; border-radius:8px;">
+          <div style="font-weight:600; margin:10px 0;">${p.name}</div>
+          <div>$${p.price}</div>
+        </div>
+      `).join('');
+
+      const modal = document.createElement('div');
+      modal.className = 'modal active';
+      modal.innerHTML = `
+        <div class="modal-content">
+          <span class="close-modal" onclick="this.closest('.modal').remove()">&times;</span>
+          <h3>Wishlist</h3>
+          <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:15px; margin-top:20px;">
+            ${html}
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+    };
+
+    // ==================== AUTH ====================
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        db.collection('users').doc(user.uid).get().then(doc => {
+          if (doc.exists) {
+            currentUser = { uid: user.uid, ...doc.data() };
+          } else {
+            currentUser = { uid: user.uid, email: user.email, name: user.email.split('@')[0] };
+          }
+          updateAuthUI();
+          showToast(`Welcome, ${currentUser.name}!`);
+        });
+      } else {
+        currentUser = null;
+        updateAuthUI();
+      }
     });
 
-    function showModal(modalId, type = 'login') {
+    function updateAuthUI() {
+      const authDiv = document.getElementById('auth-buttons');
+      if (currentUser) {
+        authDiv.innerHTML = `
+          <span>${currentUser.name}</span>
+          <button class="btn btn-outline" onclick="logout()">Logout</button>
+        `;
+      } else {
+        authDiv.innerHTML = `
+          <button class="btn btn-outline" onclick="showModal('auth-modal', 'login')">Login</button>
+          <button class="btn btn-primary" onclick="showModal('auth-modal', 'register')">Register</button>
+        `;
+      }
+    }
+
+    window.showModal = function(modalId, type) {
       if (modalId === 'auth-modal') {
         document.getElementById('auth-title').textContent = type === 'login' ? 'Login' : 'Create Account';
         document.getElementById('auth-name').style.display = type === 'register' ? 'block' : 'none';
       }
       document.getElementById(modalId).classList.add('active');
-    }
+    };
 
-    function closeModal(modalId) {
+    window.closeModal = function(modalId) {
       document.getElementById(modalId).classList.remove('active');
-    }
+    };
 
-    async function handleAuth(e) {
+    window.handleAuth = async function(e) {
       e.preventDefault();
       const email = document.getElementById('auth-email').value;
       const password = document.getElementById('auth-password').value;
+      const name = document.getElementById('auth-name').value;
       const title = document.getElementById('auth-title').textContent;
 
       try {
         if (title === 'Create Account') {
-          await auth.createUserWithEmailAndPassword(email, password);
-          showToast('Welcome to Style Hub! 🎉');
+          const userCred = await auth.createUserWithEmailAndPassword(email, password);
+          await db.collection('users').doc(userCred.user.uid).set({
+            name: name || email.split('@')[0],
+            email: email,
+            createdAt: new Date().toISOString()
+          });
         } else {
           await auth.signInWithEmailAndPassword(email, password);
         }
@@ -1471,679 +1191,35 @@
       } catch (error) {
         showToast(error.message);
       }
-    }
+    };
 
-    function logout() {
+    window.logout = function() {
       auth.signOut();
-      showToast('Logged out');
-    }
+    };
 
-    function updateUIForUser() {
-      const authButtons = document.getElementById('auth-buttons');
-      const adminToggle = document.getElementById('admin-toggle');
-      
-      if (currentUser) {
-        authButtons.innerHTML = `
-          <span style="padding: 0 10px;">Hello, ${currentUser.name}</span>
-          <button class="btn btn-outline btn-sm" onclick="logout()">Logout</button>
-        `;
-        if (currentUser.isAdmin) adminToggle.style.display = 'block';
-        document.getElementById('orders-section').style.display = 'block';
-      } else {
-        authButtons.innerHTML = `
-          <button class="btn btn-outline btn-sm" onclick="showModal('auth-modal', 'login')">Login</button>
-          <button class="btn btn-primary btn-sm" onclick="showModal('auth-modal', 'register')">Register</button>
-        `;
-        adminToggle.style.display = 'none';
-        document.getElementById('orders-section').style.display = 'none';
-      }
-    }
-
-    // ==================== THEME TOGGLE ====================
-    function toggleTheme() {
+    // ==================== THEME ====================
+    window.toggleTheme = function() {
       document.body.classList.toggle('dark-mode');
       const icon = document.querySelector('.theme-toggle i');
-      if (document.body.classList.contains('dark-mode')) {
-        icon.className = 'fas fa-sun';
-        localStorage.setItem('theme', 'dark');
-      } else {
-        icon.className = 'fas fa-moon';
-        localStorage.setItem('theme', 'light');
-      }
-    }
-
-    if (localStorage.getItem('theme') === 'dark') {
-      document.body.classList.add('dark-mode');
-      document.querySelector('.theme-toggle i').className = 'fas fa-sun';
-    }
-
-    // ==================== DISPLAY PRODUCTS WITH SLIDER ====================
-    function displayProducts(productsToShow) {
-      const grid = document.getElementById('product-grid');
-      
-      grid.innerHTML = productsToShow.map(p => {
-        const inWishlist = wishlist.includes(p.id);
-        const stockClass = p.stock > 10 ? 'in-stock' : p.stock > 0 ? 'low-stock' : 'out-of-stock';
-        const stockText = p.stock > 10 ? 'In Stock' : p.stock > 0 ? `Only ${p.stock} left` : 'Out of Stock';
-        
-        return `
-        <div class="product-card" data-product-id="${p.id}">
-          <div class="product-image-slider" id="slider-${p.id}">
-            <div class="slider-main-image">
-              <img src="${p.images[0]}" alt="${p.name}" id="main-img-${p.id}">
-            </div>
-            
-            <!-- Navigation Arrows -->
-            <button class="slider-arrow left" onclick="changeImage(${p.id}, -1)">❮</button>
-            <button class="slider-arrow right" onclick="changeImage(${p.id}, 1)">❯</button>
-            
-            <!-- Thumbnails -->
-            <div class="thumbnail-container">
-              ${p.images.map((img, idx) => `
-                <div class="thumbnail ${idx === 0 ? 'active' : ''}" onclick="setMainImage(${p.id}, ${idx})">
-                  <img src="${img}" alt="Thumbnail ${idx + 1}">
-                </div>
-              `).join('')}
-            </div>
-          </div>
-          
-          <div class="product-info">
-            <div class="product-name">${p.name}</div>
-            <div class="product-category">${p.category}</div>
-            <div class="product-rating">
-              ${generateStars(p.rating)} (${p.rating.toFixed(1)})
-            </div>
-            
-            <!-- Size Variants -->
-            <div class="product-variants">
-              <div class="variant-label">Size:</div>
-              <div class="size-options">
-                ${p.sizes.map(size => `
-                  <button class="size-btn" data-product="${p.id}" data-size="${size}" 
-                          onclick="selectSize(${p.id}, '${size}')">${size}</button>
-                `).join('')}
-              </div>
-            </div>
-
-            <!-- Color Variants -->
-            <div class="product-variants">
-              <div class="variant-label">Color:</div>
-              <div class="color-options">
-                ${p.colors.map(color => `
-                  <span class="color-dot" data-product="${p.id}" data-color="${color}"
-                        style="background: ${color.toLowerCase()};" 
-                        onclick="selectColor(${p.id}, '${color}')"></span>
-                `).join('')}
-              </div>
-            </div>
-
-            <div class="product-price">$${p.price.toFixed(2)}</div>
-            <div class="product-stock ${stockClass}">${stockText}</div>
-            
-            <div class="product-actions">
-              <button class="btn-add-cart" onclick="addToCart(${p.id})" ${p.stock === 0 ? 'disabled' : ''}>
-                <i class="fas fa-cart-plus"></i> ${p.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
-              </button>
-              <button class="btn-review" onclick="toggleWishlist(${p.id})" title="Add to wishlist">
-                <i class="${wishlist.includes(p.id) ? 'fas' : 'far'} fa-heart"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      `}).join('');
-
-      updateWishlistUI();
-      document.getElementById('product-count').textContent = `${productsToShow.length} products`;
-    }
-
-    // Image Slider Functions
-    window.changeImage = function(productId, direction) {
-      const product = products.find(p => p.id === productId);
-      if (!product) return;
-      
-      const mainImg = document.getElementById(`main-img-${productId}`);
-      const currentSrc = mainImg.src;
-      const currentIndex = product.images.findIndex(img => img === currentSrc);
-      let newIndex = currentIndex + direction;
-      
-      if (newIndex < 0) newIndex = product.images.length - 1;
-      if (newIndex >= product.images.length) newIndex = 0;
-      
-      setMainImage(productId, newIndex);
+      icon.className = document.body.classList.contains('dark-mode') ? 'fas fa-sun' : 'fas fa-moon';
     };
 
-    window.setMainImage = function(productId, index) {
-      const product = products.find(p => p.id === productId);
-      if (!product) return;
-      
-      const mainImg = document.getElementById(`main-img-${productId}`);
-      mainImg.src = product.images[index];
-      
-      // Update active thumbnail
-      const thumbnails = document.querySelectorAll(`#slider-${productId} .thumbnail`);
-      thumbnails.forEach((thumb, i) => {
-        if (i === index) {
-          thumb.classList.add('active');
-        } else {
-          thumb.classList.remove('active');
-        }
-      });
-    };
-
-    function generateStars(rating) {
-      let stars = '';
-      for (let i = 1; i <= 5; i++) {
-        if (i <= Math.floor(rating)) {
-          stars += '<i class="fas fa-star"></i>';
-        } else if (i - rating < 1 && i - rating > 0) {
-          stars += '<i class="fas fa-star-half-alt"></i>';
-        } else {
-          stars += '<i class="far fa-star"></i>';
-        }
-      }
-      return stars;
-    }
-
-    // ==================== FILTER FUNCTIONS ====================
-    function loadCategoryFilters() {
-      const categories = [...new Set(products.map(p => p.category))];
-      const container = document.getElementById('category-filters');
-      container.innerHTML = categories.map(cat => `
-        <label class="filter-option">
-          <input type="checkbox" value="${cat}" onchange="applyFilters()"> ${cat}
-        </label>
-      `).join('');
-    }
-
-    function applyFilters() {
-      let filtered = [...products];
-      
-      const selectedCats = [...document.querySelectorAll('#category-filters input:checked')].map(cb => cb.value);
-      if (selectedCats.length) filtered = filtered.filter(p => selectedCats.includes(p.category));
-
-      const min = parseFloat(document.getElementById('min-price').value) || 0;
-      const max = parseFloat(document.getElementById('max-price').value) || 1000;
-      filtered = filtered.filter(p => p.price >= min && p.price <= max);
-
-      const selectedSizes = [...document.querySelectorAll('.filter-section input[type="checkbox"]:checked')]
-        .map(cb => cb.value).filter(v => ['S', 'M', 'L', 'XL'].includes(v));
-      if (selectedSizes.length) {
-        filtered = filtered.filter(p => p.sizes.some(s => selectedSizes.includes(s)));
-      }
-
-      const minRating = parseFloat(document.getElementById('rating-filter').value);
-      if (minRating > 0) filtered = filtered.filter(p => p.rating >= minRating);
-
-      const sortBy = document.getElementById('sort-by').value;
-      if (sortBy === 'price-low') filtered.sort((a, b) => a.price - b.price);
-      else if (sortBy === 'price-high') filtered.sort((a, b) => b.price - a.price);
-      else if (sortBy === 'rating') filtered.sort((a, b) => b.rating - a.rating);
-
-      displayProducts(filtered);
-    }
-
-    // ==================== WISHLIST ====================
-    function toggleWishlist(productId) {
-      if (!currentUser) {
-        showToast('Please login first');
-        return;
-      }
-      
-      const index = wishlist.indexOf(productId);
-      if (index === -1) {
-        wishlist.push(productId);
-        showToast('Added to wishlist!');
-      } else {
-        wishlist.splice(index, 1);
-        showToast('Removed from wishlist');
-      }
-      localStorage.setItem('wishlist', JSON.stringify(wishlist));
-      updateWishlistUI();
-    }
-
-    function updateWishlistUI() {
-      document.getElementById('wishlist-count').textContent = wishlist.length;
-    }
-
-    function showWishlist() {
-      if (wishlist.length === 0) {
-        showToast('Wishlist is empty');
-        return;
-      }
-      
-      const wishlistProducts = products.filter(p => wishlist.includes(p.id));
-      let html = '<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">';
-      wishlistProducts.forEach(p => {
-        html += `
-          <div style="text-align: center; padding: 15px; background: #f8fafc; border-radius: 12px;">
-            <img src="${p.images[0]}" style="width: 100%; height: 100px; object-fit: cover; border-radius: 8px;">
-            <div style="font-weight: 600;">${p.name}</div>
-            <div>$${p.price}</div>
-          </div>
-        `;
-      });
-      html += '</div>';
-
-      const modal = document.createElement('div');
-      modal.className = 'modal active';
-      modal.innerHTML = `
-        <div class="modal-content">
-          <button class="close-modal" onclick="this.closest('.modal').remove()">&times;</button>
-          <h3>My Wishlist</h3>
-          ${html}
-        </div>
-      `;
-      document.body.appendChild(modal);
-    }
-
-    // ==================== COMPARE ====================
-    function toggleCompare(productId) {
-      if (compareList.includes(productId)) {
-        compareList = compareList.filter(id => id !== productId);
-        showToast('Removed from compare');
-      } else {
-        if (compareList.length >= 4) {
-          showToast('Max 4 products');
-          return;
-        }
-        compareList.push(productId);
-        showToast('Added to compare');
-      }
-      localStorage.setItem('compareList', JSON.stringify(compareList));
-      document.getElementById('compare-count').textContent = compareList.length;
-    }
-
-    function showCompare() {
-      if (compareList.length < 2) {
-        showToast('Select at least 2 products');
-        return;
-      }
-
-      const compareProducts = products.filter(p => compareList.includes(p.id));
-      let html = '<table style="width:100%; border-collapse:collapse;"><tr><th>Feature</th>';
-      compareProducts.forEach(p => html += `<th>${p.name}</th>`);
-      html += '</tr>';
-
-      const features = ['Price', 'Category', 'Rating', 'Sizes', 'Colors'];
-      features.forEach(f => {
-        html += `<tr><td style="padding:10px; border:1px solid #e2e8f0;">${f}</td>`;
-        compareProducts.forEach(p => {
-          if (f === 'Price') html += `<td style="padding:10px; border:1px solid #e2e8f0;">$${p.price}</td>`;
-          else if (f === 'Category') html += `<td>${p.category}</td>`;
-          else if (f === 'Rating') html += `<td>${p.rating} ★</td>`;
-          else if (f === 'Sizes') html += `<td>${p.sizes.join(', ')}</td>`;
-          else if (f === 'Colors') html += `<td>${p.colors.join(', ')}</td>`;
-        });
-        html += '</tr>';
-      });
-      html += '</table>';
-
-      const modal = document.createElement('div');
-      modal.className = 'modal active';
-      modal.innerHTML = `
-        <div class="modal-content" style="max-width:800px;">
-          <button class="close-modal" onclick="this.closest('.modal').remove()">&times;</button>
-          <h3>Compare Products</h3>
-          ${html}
-        </div>
-      `;
-      document.body.appendChild(modal);
-    }
-
-    // ==================== CART ====================
-    let selectedSizes = {};
-    let selectedColors = {};
-
-    function selectSize(productId, size) {
-      selectedSizes[productId] = size;
-      document.querySelectorAll(`.size-btn[data-product="${productId}"]`).forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.size === size);
-      });
-    }
-
-    function selectColor(productId, color) {
-      selectedColors[productId] = color;
-      document.querySelectorAll(`.color-dot[data-product="${productId}"]`).forEach(dot => {
-        dot.classList.toggle('active', dot.dataset.color === color);
-      });
-    }
-
-    function addToCart(productId) {
-      if (!currentUser) {
-        showToast('Please login first');
-        return;
-      }
-      
-      const product = products.find(p => p.id === productId);
-      if (product.stock === 0) {
-        showToast('Out of stock');
-        return;
-      }
-
-      const size = selectedSizes[productId] || product.sizes[0];
-      const color = selectedColors[productId] || product.colors[0];
-
-      const cartItem = cart.find(item => 
-        item.id === productId && item.size === size && item.color === color
-      );
-      
-      if (cartItem) {
-        if (cartItem.quantity < product.stock) {
-          cartItem.quantity++;
-        } else {
-          showToast('Max stock reached');
-          return;
-        }
-      } else {
-        cart.push({ ...product, quantity: 1, size, color });
-      }
-      
-      updateCart();
-      showToast('Added to cart!');
-    }
-
-    function updateCart() {
-      const total = cart.reduce((sum, item) => sum + item.quantity, 0);
-      document.getElementById('cart-count').textContent = total;
-      localStorage.setItem('cart', JSON.stringify(cart));
-    }
-
-    function showCart() {
-      if (cart.length === 0) {
-        showToast('Cart is empty');
-        return;
-      }
-
-      const cartItems = document.getElementById('cart-items');
-      const cartTotal = document.getElementById('cart-total');
-      
-      cartItems.innerHTML = cart.map(item => `
-        <div class="cart-item">
-          <img src="${item.images[0]}" alt="${item.name}">
-          <div class="cart-item-details">
-            <div class="cart-item-title">${item.name}</div>
-            <div>Size: ${item.size} | Color: ${item.color}</div>
-            <div class="cart-item-price">$${item.price} x ${item.quantity}</div>
-            <button class="cart-item-remove" onclick="removeFromCart('${item.id}_${item.size}_${item.color}')">
-              <i class="fas fa-trash"></i> Remove
-            </button>
-          </div>
-          <div>$${(item.price * item.quantity).toFixed(2)}</div>
-        </div>
-      `).join('');
-
-      const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-      cartTotal.textContent = `Total: $${total.toFixed(2)}`;
-      currentOrderTotal = total;
-
-      document.getElementById('cart-modal').classList.add('active');
-    }
-
-    function removeFromCart(itemKey) {
-      const [id, size, color] = itemKey.split('_');
-      cart = cart.filter(item => !(item.id == id && item.size === size && item.color === color));
-      updateCart();
-      showCart();
-    }
-
-    // ==================== PAYMENT SYSTEM ====================
-    function proceedToPayment() {
-      if (cart.length === 0) {
-        showToast('Cart is empty');
-        return;
-      }
-      
-      closeModal('cart-modal');
-      showPaymentModal();
-    }
-
-    function showPaymentModal() {
-      const modal = document.getElementById('payment-modal');
-      const body = document.getElementById('payment-body');
-      
-      body.innerHTML = generatePaymentHTML();
-      modal.classList.add('active');
-      
-      // Select default payment method
-      selectPaymentMethod('bkash');
-    }
-
-    function generatePaymentHTML() {
-      const subtotal = currentOrderTotal;
-      const shipping = subtotal > 100 ? 0 : 10;
-      const total = subtotal + shipping;
-
-      return `
-        <div class="order-summary">
-          <h4 style="margin-bottom: 15px;">Order Summary</h4>
-          <div class="summary-item">
-            <span>Subtotal</span>
-            <span>$${subtotal.toFixed(2)}</span>
-          </div>
-          <div class="summary-item">
-            <span>Shipping</span>
-            <span>${shipping === 0 ? 'Free' : '$' + shipping.toFixed(2)}</span>
-          </div>
-          <div class="summary-total">
-            <span>Total</span>
-            <span>$${total.toFixed(2)}</span>
-          </div>
-        </div>
-
-        <h4 style="margin-bottom: 15px;">Select Payment Method</h4>
-        <div class="payment-methods">
-          <div class="payment-method ${selectedPaymentMethod === 'bkash' ? 'selected' : ''}" onclick="selectPaymentMethod('bkash')">
-            <i class="fas fa-mobile-alt bkash"></i>
-            <span>bKash</span>
-          </div>
-          <div class="payment-method" onclick="selectPaymentMethod('nagad')">
-            <i class="fas fa-mobile-alt nagad"></i>
-            <span>Nagad</span>
-          </div>
-          <div class="payment-method" onclick="selectPaymentMethod('rocket')">
-            <i class="fas fa-mobile-alt rocket"></i>
-            <span>Rocket</span>
-          </div>
-          <div class="payment-method" onclick="selectPaymentMethod('card')">
-            <i class="fas fa-credit-card card"></i>
-            <span>Card</span>
-          </div>
-        </div>
-
-        <div id="payment-form-container">
-          ${getPaymentForm()}
-        </div>
-      `;
-    }
-
-    function getPaymentForm() {
-      switch(selectedPaymentMethod) {
-        case 'bkash':
-        case 'nagad':
-        case 'rocket':
-          return `
-            <div class="payment-form">
-              <div class="form-group">
-                <label>Mobile Number</label>
-                <input type="tel" placeholder="01XXXXXXXXX" id="mobile-number">
-              </div>
-              <div class="form-group">
-                <label>Transaction ID</label>
-                <input type="text" placeholder="Enter transaction ID" id="trx-id">
-              </div>
-              <div class="form-group">
-                <label>Amount</label>
-                <input type="text" value="$${currentOrderTotal.toFixed(2)}" readonly>
-              </div>
-              <div style="background: #f1f5f9; padding: 15px; border-radius: 12px; margin: 20px 0;">
-                <p style="margin-bottom: 5px;"><strong>Instructions:</strong></p>
-                <p>1. Go to your ${selectedPaymentMethod.toUpperCase()} app</p>
-                <p>2. Send $${currentOrderTotal.toFixed(2)} to 019XXXXXXXX</p>
-                <p>3. Enter the transaction ID above</p>
-              </div>
-            </div>
-          `;
-        
-        case 'card':
-          return `
-            <div class="payment-form">
-              <div class="form-group">
-                <label>Card Number</label>
-                <input type="text" placeholder="1234 5678 9012 3456" id="card-number">
-              </div>
-              <div class="card-details">
-                <div class="form-group">
-                  <label>Expiry</label>
-                  <input type="text" placeholder="MM/YY" id="expiry">
-                </div>
-                <div class="form-group">
-                  <label>CVV</label>
-                  <input type="text" placeholder="123" id="cvv">
-                </div>
-              </div>
-              <div class="form-group">
-                <label>Card Holder</label>
-                <input type="text" placeholder="Name on card" id="card-name">
-              </div>
-            </div>
-          `;
-        
-        default:
-          return '';
-      }
-    }
-
-    window.selectPaymentMethod = function(method) {
-      selectedPaymentMethod = method;
-      document.querySelectorAll('.payment-method').forEach(el => {
-        el.classList.remove('selected');
-      });
-      event.target.closest('.payment-method').classList.add('selected');
-      
-      const formContainer = document.getElementById('payment-form-container');
-      formContainer.innerHTML = getPaymentForm();
-    };
-
-    function processPayment() {
-      // Validate form based on payment method
-      if (selectedPaymentMethod === 'bkash' || selectedPaymentMethod === 'nagad' || selectedPaymentMethod === 'rocket') {
-        const mobile = document.getElementById('mobile-number')?.value;
-        const trxId = document.getElementById('trx-id')?.value;
-        
-        if (!mobile || !trxId) {
-          showToast('Please fill all fields');
-          return;
-        }
-        if (!/^01[3-9]\d{8}$/.test(mobile)) {
-          showToast('Invalid mobile number');
-          return;
-        }
-      } else if (selectedPaymentMethod === 'card') {
-        const card = document.getElementById('card-number')?.value.replace(/\s/g, '');
-        const expiry = document.getElementById('expiry')?.value;
-        const cvv = document.getElementById('cvv')?.value;
-        const name = document.getElementById('card-name')?.value;
-        
-        if (!card || !expiry || !cvv || !name) {
-          showToast('Please fill all fields');
-          return;
-        }
-        if (!/^\d{16}$/.test(card)) {
-          showToast('Invalid card number');
-          return;
-        }
-        if (!/^\d{3}$/.test(cvv)) {
-          showToast('Invalid CVV');
-          return;
-        }
-      }
-
-      // Show processing
-      showToast('Processing payment...');
-      
-      // Simulate payment processing
-      setTimeout(() => {
-        // Show success
-        const body = document.getElementById('payment-body');
-        body.innerHTML = `
-          <div class="payment-success">
-            <div class="success-animation">
-              <i class="fas fa-check"></i>
-            </div>
-            <h3 style="margin-bottom: 15px;">Payment Successful!</h3>
-            <p style="color: var(--gray); margin-bottom: 25px;">Your order has been placed.</p>
-            <p>Order ID: #${Math.floor(Math.random() * 10000)}</p>
-            <p>Amount: $${currentOrderTotal.toFixed(2)}</p>
-            <p>Payment Method: ${selectedPaymentMethod.toUpperCase()}</p>
-            <button class="btn btn-primary" style="margin-top: 25px;" onclick="closePaymentModal()">Done</button>
-          </div>
-        `;
-
-        // Clear cart
-        cart = [];
-        updateCart();
-        showToast('Payment successful! 🎉');
-      }, 2000);
-    }
-
-    function closePaymentModal() {
-      document.getElementById('payment-modal').classList.remove('active');
-    }
-
-    // ==================== SEARCH ====================
-    document.getElementById('search-input').addEventListener('input', function(e) {
-      const term = e.target.value.toLowerCase();
-      if (term.length < 2) {
-        document.getElementById('suggestions').classList.remove('active');
-        return;
-      }
-
-      const matches = products.filter(p => 
-        p.name.toLowerCase().includes(term) || 
-        p.category.toLowerCase().includes(term)
-      ).slice(0, 5);
-
-      const suggestions = document.getElementById('suggestions');
-      suggestions.innerHTML = matches.map(p => `
-        <div class="suggestion-item" onclick="searchProduct('${p.name}')">
-          <img src="${p.images[0]}">
-          <div>
-            <strong>${p.name}</strong><br>
-            <small>$${p.price}</small>
-          </div>
-        </div>
-      `).join('');
-      suggestions.classList.add('active');
-    });
-
-    function searchProduct(name) {
-      document.getElementById('search-input').value = name;
-      document.getElementById('suggestions').classList.remove('active');
-      const filtered = products.filter(p => p.name.toLowerCase().includes(name.toLowerCase()));
-      displayProducts(filtered);
-    }
-
-    document.addEventListener('click', function(e) {
-      if (!e.target.closest('.search-container')) {
-        document.getElementById('suggestions').classList.remove('active');
-      }
-    });
-
-    // ==================== UTILITIES ====================
-    function showToast(message) {
+    // ==================== UTILS ====================
+    function showToast(msg) {
       const toast = document.getElementById('toast');
-      toast.textContent = message;
+      toast.textContent = msg;
       toast.style.display = 'block';
-      setTimeout(() => {
-        toast.style.display = 'none';
-      }, 3000);
+      setTimeout(() => toast.style.display = 'none', 3000);
+    }
+
+    function updateCounts() {
+      document.getElementById('wishlist-count').textContent = wishlist.length;
+      updateCart();
     }
 
     // ==================== INIT ====================
-    loadCategoryFilters();
-    updateWishlistUI();
-    document.getElementById('compare-count').textContent = compareList.length;
-    updateCart();
+    displayProducts();
+    changeLanguage('en');
   </script>
 </body>
-              </html>
+</html>
