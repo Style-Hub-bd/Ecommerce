@@ -7,16 +7,17 @@
   
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <!-- Chart.js for Analytics -->
+  <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
-  <!-- ==================== FIREBASE SDK (CORRECT VERSION FOR GITHUB) ==================== -->
+  <!-- Firebase SDK (Compat version for easier use) -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
   
   <style>
     /* ==================== GLOBAL STYLES ==================== */
@@ -554,7 +555,6 @@
       transition: width 0.3s;
     }
 
-    /* Admin Products List */
     .admin-products-list {
       display: grid;
       gap: 10px;
@@ -703,7 +703,6 @@
       color: #fbbf24;
     }
 
-    /* Cart Items */
     .cart-item {
       display: flex;
       gap: 15px;
@@ -771,7 +770,7 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* Responsive Design */
+    /* Responsive */
     @media (max-width: 768px) {
       .main-layout {
         grid-template-columns: 1fr;
@@ -788,10 +787,6 @@
       
       .nav-menu {
         flex-wrap: wrap;
-        justify-content: center;
-      }
-      
-      .admin-tabs {
         justify-content: center;
       }
     }
@@ -1043,19 +1038,21 @@
   <div class="toast" id="toast"></div>
 
   <script>
-    // ==================== FIREBASE CONFIGURATION ====================
-    // Replace with your Firebase config
+    // ==================== 🔥 FIREBASE CONFIGURATION ====================
+    // Your Firebase configuration
     const firebaseConfig = {
-      apiKey: "AIzaSyB_4yX5n5X5n5X5n5X5n5X5n5X5n5X5n5X5", // Replace with your actual API key
-      authDomain: "your-project.firebaseapp.com", // Replace with your auth domain
-      projectId: "your-project-id", // Replace with your project ID
-      storageBucket: "your-project.appspot.com", // Replace with your storage bucket
-      messagingSenderId: "123456789012", // Replace with your sender ID
-      appId: "1:123456789012:web:abc123def456" // Replace with your app ID
+      apiKey: "AIzaSyDxOMNduC5AU5AaHmga2yC_V3RHjhX2ykQ",
+      authDomain: "style-hub-fe257.firebaseapp.com",
+      projectId: "style-hub-fe257",
+      storageBucket: "style-hub-fe257.firebasestorage.app",
+      messagingSenderId: "544518937543",
+      appId: "1:544518937543:web:74dbc18a88b1f1d16f97e2",
+      measurementId: "G-DJEFR8K4M5"
     };
 
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
+    const analytics = firebase.analytics();
     const auth = firebase.auth();
     const db = firebase.firestore();
     const storage = firebase.storage();
@@ -1081,8 +1078,10 @@
               ...userDoc.data()
             };
           } else {
-            // Create user document if it doesn't exist
-            const isAdmin = (await db.collection('users').get()).empty;
+            // Check if this is the first user (will be admin)
+            const usersSnapshot = await db.collection('users').get();
+            const isAdmin = usersSnapshot.empty;
+            
             const userData = {
               name: user.email.split('@')[0],
               email: user.email,
@@ -1129,9 +1128,11 @@
         document.getElementById('loading-spinner').classList.add('active');
         
         if (title === 'Create Account') {
+          // Register
           const userCredential = await auth.createUserWithEmailAndPassword(email, password);
           showToast('Welcome to Style Hub! 🎉');
         } else {
+          // Login
           await auth.signInWithEmailAndPassword(email, password);
         }
         
@@ -1670,10 +1671,12 @@
         };
 
         if (editingId) {
+          // Update existing product
           await db.collection('products').doc(editingId).update(productData);
           showToast('Product updated!');
           delete document.getElementById('product-form').dataset.editingId;
         } else {
+          // Add new product
           productData.createdAt = firebase.firestore.FieldValue.serverTimestamp();
           productData.rating = 0;
           productData.reviews = [];
@@ -1700,12 +1703,14 @@
       const file = e.target.files[0];
       if (!file) return;
 
+      // Preview image
       const reader = new FileReader();
       reader.onload = function(e) {
         document.getElementById('image-preview').innerHTML = `<img src="${e.target.result}" alt="Preview">`;
       };
       reader.readAsDataURL(file);
 
+      // Upload to Firebase Storage
       try {
         const progressBar = document.getElementById('upload-progress');
         const progressBarFill = document.getElementById('upload-progress-bar');
