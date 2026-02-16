@@ -582,30 +582,28 @@
     }
 
     .product-stock {
-      font-size: 0.85rem
-<script>
-  // ১. আপনার ফায়ারবেস কনফিগারেশন
-  const firebaseConfig = {
-    apiKey: "AIzaSyDxRlq3dNmZzyFhGVt-eIRK_vvWRXCBtr8",
-    authDomain: "style-fb688.firebaseapp.com",
-    projectId: "style-fb688",
-    storageBucket: "style-fb688.firebasestorage.app",
-    messagingSenderId: "711167491795",
-    appId: "1:711167491795:web:e6cca526ecc40a965d1e26",
-    measurementId: "G-0YFGHYWZ52"
-  };
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin-bottom: 10px;
+    }
 
-  // ২. ফায়ারবেস ইনিশিয়ালাইজ করা (Compat ভার্সন অনুযায়ী)
-  if (!firebase.apps.length) {
-      firebase.initializeApp(firebaseConfig);
-      console.log("Firebase Connected Successfully!");
-  }
+    .product-stock.in-stock {
+      color: var(--secondary);
+    }
 
-  // ৩. ডার্ক মোড বাটন কাজ করানোর ছোট একটি কোড (যাতে সাইট সাদা না থাকে)
-  const themeBtn = document.querySelector('.theme-toggle');
-  if(themeBtn) {
-      themeBtn.addEventListener('click', () => {
-          document.body.classList.toggle('dark-mode');
-      });
-  }
-</script>
+    .product-stock.low-stock {
+      color: var(--warning);
+    }
+
+    .product-stock.out-of-stock {
+      color: var(--danger);
+    }
+
+    /* Product Variants */
+    .product-variants {
+      margin: 12px 0;
+    }
+
+    .variant-label {
+      font-size: 0.85rem;
+      color:
